@@ -1,0 +1,9 @@
+id,name,district,type,lat,lon,monthly_capacity,current_cases,naat_stock,presumptive_tests
+N001,DTC Satara,Satara,NAAT,17.6854,74.0099,200,45,120,2500
+N002,Civil Hospital Sangli,Sangli,NAAT,16.8524,74.5815,180,38,15,2200
+N003,Sassoon Hospital Pune,Pune,NAAT,18.5195,73.8553,300,92,8,4100
+N004,SDH Karad,Satara,NAAT,17.2882,74.1862,150,60,45,1800
+N005,District Hospital Miraj,Sangli,NAAT,16.8267,74.6451,160,42,3,1900
+N006,KEM Hospital Pune,Pune,NAAT,18.5167,73.8464,250,78,60,3200
+N007,RH Koregaon,Satara,NAAT,17.6833,74.15,100,22,90,900
+N008,SDH Phaltan,Satara,NAAT,18.0241,74.431,120,18,55,1100
