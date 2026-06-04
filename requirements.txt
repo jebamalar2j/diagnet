@@ -3,3 +3,4 @@ requests
 networkx
 gradio
 folium
+plotly
