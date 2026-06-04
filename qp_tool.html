@@ -436,9 +436,9 @@ function showDetail(name){
 
   document.getElementById('detailContent').innerHTML = `
     <div style="display:flex;gap:0;margin-bottom:10px;border-bottom:1px solid #30363d">
-      <button onclick="showTab('feeders')" id="tab_feeders" style="padding:6px 14px;border:none;border-bottom:2px solid #1f6feb;background:none;color:#58a6ff;cursor:pointer;font-size:12px">Feeder Sites</button>
-      <button onclick="showTab('s1')" id="tab_s1" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 1 — NAAT Load</button>
-      <button onclick="showTab('s2')" id="tab_s2" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 2 — DR-TB Cost</button>
+      <button id="tab_feeders" style="padding:6px 14px;border:none;border-bottom:2px solid #1f6feb;background:none;color:#58a6ff;cursor:pointer;font-size:12px">Feeder Sites</button>
+      <button id="tab_s1" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 1 — NAAT Load</button>
+      <button id="tab_s2" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 2 — DR-TB Cost</button>
     </div>
     <div id="tab_feeders_content">
     <table><thead><tr>
@@ -451,6 +451,9 @@ function showDetail(name){
       <table style="margin-top:6px"><thead><tr><th>Category</th><th>Pathway</th><th>Est. count</th><th>To test</th></tr></thead>
       <tbody>${vulnBreakdown(hub.total_pop)}</tbody></table>
     </details>
+    </div>
+    <div id="tab_s1_content" style="display:none">${s1}</div>
+    <div id="tab_s2_content" style="display:none">${s2}</div>
   `;
 
   document.getElementById('detailPanel').style.display = 'block';
