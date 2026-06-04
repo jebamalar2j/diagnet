@@ -572,6 +572,18 @@ function buildSel(){
   });
 }
 
+function showTab(t){
+  ['feeders','s1','s2'].forEach(id=>{
+    const c = document.getElementById('tab_'+id+'_content');
+    const b = document.getElementById('tab_'+id);
+    if(c) c.style.display = id===t?'block':'none';
+    if(b){
+      b.style.color = id===t?'#58a6ff':'#8b949e';
+      b.style.borderBottomColor = id===t?'#1f6feb':'transparent';
+    }
+  });
+}
+
 function initAll(){
   buildDD();
   buildSel();
