@@ -1,0 +1,6 @@
+id,name,lat,lon,monthly_capacity,current_cases
+F001,District Hospital A,13.08,80.27,120,45
+F002,CHC Block B,13.12,80.2,60,55
+F003,PHC Village C,13.05,80.32,30,8
+F004,CHC Block D,13.18,80.15,60,20
+F005,PHC Village E,12.98,80.24,30,5

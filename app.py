@@ -36,15 +36,12 @@ def make_map():
             popup=folium.Popup(
                 f"<b>{f['name']}</b><br>"
                 f"Status: {status}<br>"
-                f"Cartridges: {f.get('current_cases','N/A')}<br>"
                 f"Best referral: {best}",
                 max_width=200
             )
         ).add_to(m)
 
-    map_path = "map.html"
-    m.save(map_path)
-    return map_path
+    return m._repr_html_()
 
 def show_alerts():
     R = load_results()
@@ -66,27 +63,26 @@ def show_routing():
     for src, val in R["routing"].items():
         if "error" not in val:
             rows.append({
-                "from_facility": src,
-                "best_referral": val.get("dest_name", ""),
+                "from_facility":  src,
+                "best_referral":  val.get("dest_name", ""),
                 "estimated_cost": val.get("estimated_cost", "")
             })
     return pd.DataFrame(rows)
 
-# ── Build dashboard ───────────────────────────────────────────
+R = load_results()
+
 with gr.Blocks(title="DiagNet TB Dashboard", theme=gr.themes.Soft()) as demo:
 
     gr.Markdown("# DiagNet — TB Diagnostic Network Monitor")
-    R = load_results()
     gr.Markdown(f"*Last updated: {R['generated_at']}*")
 
     with gr.Row():
-        gr.Metric(label="Stockout Alerts",  value=len(R["alerts"]))
-        gr.Metric(label="Anomalies Flagged", value=len(R["anomalies"]))
-        gr.Metric(label="Facilities Mapped", value=len(R["routing"]))
+        gr.Textbox(label="Stockout Alerts",   value=str(len(R["alerts"])),    interactive=False)
+        gr.Textbox(label="Anomalies Flagged", value=str(len(R["anomalies"])), interactive=False)
+        gr.Textbox(label="Facilities Mapped", value=str(len(R["routing"])),   interactive=False)
 
     with gr.Tab("Facility Map"):
-        map_path = make_map()
-        gr.HTML(open(map_path).read())
+        gr.HTML(make_map())
 
     with gr.Tab("Stockout Alerts"):
         gr.Dataframe(value=show_alerts())
