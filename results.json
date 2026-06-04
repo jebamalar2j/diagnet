@@ -1,106 +1,253 @@
 {
-  "generated_at": "2026-06-04 15:22:05.758716",
-  "alerts": [],
+  "generated_at": "2026-06-04 15:25:05.975376",
+  "alerts": [
+    {
+      "facility_id": "F005",
+      "facility_name": "PHC Rahimatpur",
+      "district": "Satara",
+      "cartridges_left": 0,
+      "presumptive_tests": 1190,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F007",
+      "facility_name": "UPHC Shamrao Nagar",
+      "district": "Sangli",
+      "cartridges_left": 0,
+      "presumptive_tests": 2268,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F008",
+      "facility_name": "PHC Wathar K.",
+      "district": "Satara",
+      "cartridges_left": 0,
+      "presumptive_tests": 770,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F009",
+      "facility_name": "UPHC Miraj Urban",
+      "district": "Sangli",
+      "cartridges_left": 0,
+      "presumptive_tests": 4000,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F010",
+      "facility_name": "HEALTH CAMP",
+      "district": "Pune",
+      "cartridges_left": 0,
+      "presumptive_tests": 1631,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F011",
+      "facility_name": "HEALTH CAMP",
+      "district": "Pune",
+      "cartridges_left": 0,
+      "presumptive_tests": 1631,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F012",
+      "facility_name": "UPHC Sakhar Karkhana",
+      "district": "Sangli",
+      "cartridges_left": 0,
+      "presumptive_tests": 4108,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F014",
+      "facility_name": "BARATE DISP",
+      "district": "Pune",
+      "cartridges_left": 0,
+      "presumptive_tests": 1334,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F015",
+      "facility_name": "Civil Hospital Satara",
+      "district": "Satara",
+      "cartridges_left": 0,
+      "presumptive_tests": 1500,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F016",
+      "facility_name": "MOHAMMADWADI",
+      "district": "Pune",
+      "cartridges_left": 0,
+      "presumptive_tests": 885,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F017",
+      "facility_name": "KALAS",
+      "district": "Pune",
+      "cartridges_left": 0,
+      "presumptive_tests": 2194,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F018",
+      "facility_name": "PHC Saigaon",
+      "district": "Satara",
+      "cartridges_left": 0,
+      "presumptive_tests": 866,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F019",
+      "facility_name": "UPHC Godoli",
+      "district": "Satara",
+      "cartridges_left": 0,
+      "presumptive_tests": 1290,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F020",
+      "facility_name": "PHC Rajale",
+      "district": "Satara",
+      "cartridges_left": 0,
+      "presumptive_tests": 1646,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    }
+  ],
   "anomalies": [],
   "routing": {
     "F001": {
       "best_dest": "F005",
       "dest_name": "PHC Rahimatpur",
+      "dest_district": "Satara",
       "estimated_cost": 53.9
     },
     "F002": {
       "best_dest": "F016",
       "dest_name": "MOHAMMADWADI",
+      "dest_district": "Pune",
       "estimated_cost": 16.6
     },
     "F003": {
       "best_dest": "F006",
       "dest_name": "UPHC Indira Nagar",
+      "dest_district": "Sangli",
       "estimated_cost": 9.2
     },
     "F004": {
       "best_dest": "F012",
       "dest_name": "UPHC Sakhar Karkhana",
+      "dest_district": "Sangli",
       "estimated_cost": 0.1
     },
     "F005": {
       "best_dest": "F008",
       "dest_name": "PHC Wathar K.",
+      "dest_district": "Satara",
       "estimated_cost": 14.9
     },
     "F006": {
       "best_dest": "F003",
       "dest_name": "UPHC Miraj Urban",
+      "dest_district": "Sangli",
       "estimated_cost": 9.2
     },
     "F007": {
       "best_dest": "F012",
       "dest_name": "UPHC Sakhar Karkhana",
+      "dest_district": "Sangli",
       "estimated_cost": 9.8
     },
     "F008": {
       "best_dest": "F005",
       "dest_name": "PHC Rahimatpur",
+      "dest_district": "Satara",
       "estimated_cost": 14.9
     },
     "F009": {
       "best_dest": "F006",
       "dest_name": "UPHC Indira Nagar",
+      "dest_district": "Sangli",
       "estimated_cost": 61.2
     },
     "F010": {
       "best_dest": "F016",
       "dest_name": "MOHAMMADWADI",
+      "dest_district": "Pune",
       "estimated_cost": 13.7
     },
     "F011": {
       "best_dest": "F013",
       "dest_name": "Civil Hospital",
+      "dest_district": "Pune",
       "estimated_cost": 15.7
     },
     "F012": {
       "best_dest": "F004",
       "dest_name": "UPHC Sakhar Karkhana",
+      "dest_district": "Sangli",
       "estimated_cost": 0.1
     },
     "F013": {
       "best_dest": "F011",
       "dest_name": "HEALTH CAMP",
+      "dest_district": "Pune",
       "estimated_cost": 15.7
     },
     "F014": {
       "best_dest": "F013",
       "dest_name": "Civil Hospital",
+      "dest_district": "Pune",
       "estimated_cost": 19.2
     },
     "F015": {
       "best_dest": "F019",
       "dest_name": "UPHC Godoli",
+      "dest_district": "Satara",
       "estimated_cost": 2.4
     },
     "F016": {
       "best_dest": "F010",
       "dest_name": "HEALTH CAMP",
+      "dest_district": "Pune",
       "estimated_cost": 13.7
     },
     "F017": {
       "best_dest": "F011",
       "dest_name": "HEALTH CAMP",
+      "dest_district": "Pune",
       "estimated_cost": 20.6
     },
     "F018": {
       "best_dest": "F015",
       "dest_name": "Civil Hospital Satara",
+      "dest_district": "Satara",
       "estimated_cost": 38.6
     },
     "F019": {
       "best_dest": "F015",
       "dest_name": "Civil Hospital Satara",
+      "dest_district": "Satara",
       "estimated_cost": 2.4
     },
     "F020": {
       "best_dest": "F001",
       "dest_name": "PHC Pusegaon",
+      "dest_district": "Satara",
       "estimated_cost": 118.0
     }
   }

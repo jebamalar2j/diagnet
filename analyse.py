@@ -5,34 +5,42 @@ import os
 
 print("Running analysis...")
 
-# ── 1. Load data ──────────────────────────────────────────────
 facs  = pd.read_csv("data/facilities.csv")
 stock = pd.read_csv("data/stock.csv")
 
-# ── 2. Stockout alerts ────────────────────────────────────────
+# ── Stockout alerts ───────────────────────────────────────────
 stock["date"] = pd.to_datetime(stock["date"])
 stock = stock.sort_values(["facility_id", "date"])
+
 stock["rolling_avg"] = (
     stock.groupby("facility_id")["cartridges"]
          .transform(lambda x: x.rolling(14, min_periods=3).mean())
 )
-stock["alert"] = stock["cartridges"] < 2 * (stock["rolling_avg"] / 14)
 
+# Alert if current stock < 15 OR below 2x daily average
 latest = stock.sort_values("date").groupby("facility_id").last().reset_index()
+latest["alert"] = (latest["cartridges"] < 15)
+
 alerts = []
 for _, row in latest[latest["alert"] == True].iterrows():
-    fac_name = facs[facs["id"] == row["facility_id"]]["name"].values
+    fac = facs[facs["id"] == row["facility_id"]]
+    if len(fac) == 0:
+        continue
+    fac = fac.iloc[0]
     alerts.append({
-        "facility_id":   row["facility_id"],
-        "facility_name": fac_name[0] if len(fac_name) > 0 else row["facility_id"],
-        "cartridges":    int(row["cartridges"]),
-        "rolling_avg":   round(float(row["rolling_avg"]), 1),
-        "date":          str(row["date"].date())
+        "facility_id":      row["facility_id"],
+        "facility_name":    fac["name"],
+        "district":         fac["district"],
+        "cartridges_left":  int(row["cartridges"]),
+        "presumptive_tests":int(fac["presumptive_tests"]),
+        "risk_level":       "CRITICAL" if row["cartridges"] == 0 else "HIGH",
+        "date":             str(row["date"].date())
     })
 
+alerts = sorted(alerts, key=lambda x: x["cartridges_left"])
 print(f"Found {len(alerts)} stockout alerts.")
 
-# ── 3. Anomaly flags (rule-based) ─────────────────────────────
+# ── Anomaly flags ─────────────────────────────────────────────
 anomalies = []
 if os.path.exists("data/tests.csv"):
     tests = pd.read_csv("data/tests.csv")
@@ -55,7 +63,7 @@ else:
 
 print(f"Found {len(anomalies)} anomalies.")
 
-# ── 4. Routing with caseload penalty ─────────────────────────
+# ── Routing with caseload penalty ─────────────────────────────
 G = nx.DiGraph()
 for _, f in facs.iterrows():
     G.add_node(f["id"], name=f["name"], lat=f["lat"], lon=f["lon"])
@@ -82,10 +90,13 @@ for src in facs["id"]:
         best = min(
             ((cost, nid) for nid, cost in lengths.items() if nid != src)
         )
-        dest_name = facs[facs["id"] == best[1]]["name"].values
+        dest = facs[facs["id"] == best[1]]
+        dest_name = dest["name"].values[0] if len(dest) > 0 else best[1]
+        dest_district = dest["district"].values[0] if len(dest) > 0 else ""
         routing[src] = {
             "best_dest":      best[1],
-            "dest_name":      dest_name[0] if len(dest_name) > 0 else best[1],
+            "dest_name":      dest_name,
+            "dest_district":  dest_district,
             "estimated_cost": round(best[0], 1)
         }
     except Exception as e:
@@ -93,7 +104,7 @@ for src in facs["id"]:
 
 print("Routing complete.")
 
-# ── 5. Save results ───────────────────────────────────────────
+# ── Save ──────────────────────────────────────────────────────
 results = {
     "generated_at": str(pd.Timestamp.today()),
     "alerts":       alerts,
