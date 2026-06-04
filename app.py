@@ -722,10 +722,10 @@ R    = load_results()
 facs = load_facs()
 facility_names = sorted(facs["name"].tolist())
 
-with gr.Blocks(title="DiagNet TB Dashboard") as demo:
+with gr.Blocks(title="DISHA") as demo:
 
-    gr.Markdown("# Diagnostic Network Intelligence — TB")
-    gr.Markdown("**Maharashtra · Tamil Nadu · Uniamp & Quantiplus sites**")
+    gr.Markdown("# DISHA — Diagnostic Intelligence for Systematic Health Alerts")
+    gr.Markdown("**Maharashtra · Tamil Nadu · TB Diagnostic Network**")
     gr.Markdown(f"*Last updated: {R['generated_at']}*")
 
     with gr.Row():
