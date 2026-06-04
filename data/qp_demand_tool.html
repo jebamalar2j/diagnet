@@ -395,24 +395,22 @@ function showDetail(name){
   if(!hub) return;
   const pos=getPosVal(), wd=getWD(), thr=getThr(), ovPct=getOv();
 
-  document.getElementById('detailTitle').textContent = `${hub.name} — ${hub.total_feeders} feeder sites`;
-  // Render scenario tabs
-  const s1 = renderScenario1(name);
-  const s2 = renderScenario2(name);
+  document.getElementById('detailTitle').textContent = hub.name+' — '+hub.total_feeders+' feeder sites';
 
-  let rows = '';
+  // Build feeder rows
   const sorted = [...hub.feeders].map(f=>{
-    const r = calcSite(f.population, f.presumptive, pos, ovPct);
-    const s = suggestDev(r.monthlyQP, wd);
-    const saved = Math.round(r.monthlyNAAT*(1-pos/100));
-    return {...f, ...r, sug:s, saved};
+    const r=calcSite(f.population,f.presumptive,pos,ovPct);
+    const s=suggestDev(r.monthlyQP,wd);
+    const saved=Math.round(r.monthlyNAAT*(1-pos/100));
+    return {...f,...r,sug:s,saved};
   }).sort((a,b)=>b.monthlyNAAT-a.monthlyNAAT);
 
+  let rows='';
   sorted.forEach(f=>{
-    const utilPct = Math.min(200, Math.round(f.monthlyQP/f.sug.cap*100));
-    const bc = utilPct>100?'#f85149':utilPct>80?'#d29922':'#3fb950';
-    const vulnCount = Math.round(f.population * CATS.filter(c=>selectedCats.has(c.id)&&c.grp!=='Symptomatic').reduce((s,c)=>s+c.popFrac,0));
-    rows += `<tr>
+    const utilPct=Math.min(200,Math.round(f.monthlyQP/f.sug.cap*100));
+    const bc=utilPct>100?'#f85149':utilPct>80?'#d29922':'#3fb950';
+    const vulnCount=Math.round(f.population*CATS.filter(c=>selectedCats.has(c.id)&&c.grp!=='Symptomatic').reduce((s,c)=>s+c.popFrac,0));
+    rows+=`<tr>
       <td style="color:#ccc;font-weight:500">${f.name}</td>
       <td>${f.population.toLocaleString()}</td>
       <td>${vulnCount.toLocaleString()}</td>
@@ -423,48 +421,77 @@ function showDetail(name){
         <div style="font-size:10px;color:${bc}">${utilPct}%</div>
         <div class="bar-wrap" style="min-width:50px"><div class="bar-fill" style="width:${Math.min(utilPct,100)}%;background:${bc}"></div></div>
       </td>
-      <td>${f.has_uniamp?'<span class="badge bu">Uniamp ✓</span>':'<span style="color:#555;font-size:10px">None</span>'}</td>
+      <td>${f.has_uniamp?'<span class="badge bu">Uniamp</span>':'<span style="color:#555;font-size:10px">None</span>'}</td>
       <td><span class="badge ${f.has_uniamp?'bu':f.sug.badge}">${f.has_uniamp?'Deployed':f.sug.dev}</span></td>
-      <td style="color:#3fb950;font-weight:600;font-size:11px">${f.saved} NAAT tests/mo</td>
+      <td style="color:#3fb950;font-size:11px">${f.saved} NAAT tests/mo</td>
       <td style="color:#58a6ff;font-size:11px">${Math.round(f.saved*0.92*2.5).toLocaleString()} hrs/mo</td>
       <td style="font-size:10px">
-        <span style="color:#9FE1CB">Asymp/vulnerable: ${f.has_uniamp?'tested locally (1-2 hrs), no travel':'2-3 day NAAT wait → same-day with device'}</span><br>
-        <span style="color:#f0c040">Paed+EPTB: ${f.has_uniamp?'NAAT hub freed, faster slot':'competing with all presumptive for slot'}</span>
+        <span style="color:#9FE1CB">${f.has_uniamp?'Same-day result at site':'2-3 day wait → same-day with device'}</span><br>
+        <span style="color:#f0c040">Paed+EPTB: ${f.has_uniamp?'NAAT hub freed':'competing for slot'}</span>
       </td>
     </tr>`;
   });
 
-  document.getElementById('detailContent').innerHTML = `
-    <div style="display:flex;gap:0;margin-bottom:10px;border-bottom:1px solid #30363d">
-      <button id="tab_feeders" style="padding:6px 14px;border:none;border-bottom:2px solid #1f6feb;background:none;color:#58a6ff;cursor:pointer;font-size:12px">Feeder Sites</button>
-      <button id="tab_s1" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 1 — NAAT Load</button>
-      <button id="tab_s2" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 2 — DR-TB Cost</button>
-    </div>
-    <div id="tab_feeders_content">
-    <table><thead><tr>
-      <th>Site</th><th>Population</th><th>Vulnerable pop</th><th>Presumptive/yr</th>
-      <th>NAAT/month</th><th>Device tests/mo</th><th>Utilization</th>
-      <th>Current device</th><th>Recommendation</th><th>NAAT tests saved/mo</th><th>Travel hrs saved/mo</th><th>Wait time impact</th>
-    </tr></thead><tbody>${rows}</tbody></table>
-    <details style="margin-top:10px">
-      <summary style="cursor:pointer;font-size:11px;color:#58a6ff">Show vulnerability category breakdown (aggregate for ${hub.name})</summary>
-      <table style="margin-top:6px"><thead><tr><th>Category</th><th>Pathway</th><th>Est. count</th><th>To test</th></tr></thead>
-      <tbody>${vulnBreakdown(hub.total_pop)}</tbody></table>
-    </details>
-    </div>
-    <div id="tab_s1_content" style="display:none">${s1}</div>
-    <div id="tab_s2_content" style="display:none">${s2}</div>
-  `;
+  const vulnRows = vulnBreakdown(hub.total_pop);
+
+  // Build scenario content
+  const s1html = renderScenario1(name);
+  const s2html = renderScenario2(name);
+
+  // Set tab container
+  const dc = document.getElementById('detailContent');
+  dc.innerHTML = '';
+
+  // Tab bar
+  const tabBar = document.createElement('div');
+  tabBar.style.cssText = 'display:flex;gap:0;margin-bottom:10px;border-bottom:1px solid #30363d';
+  const tabs = [
+    {id:'feeders', label:'Feeder Sites'},
+    {id:'s1',      label:'Scenario 1 — NAAT Load'},
+    {id:'s2',      label:'Scenario 2 — DR-TB Cost'},
+  ];
+  tabs.forEach((t,i)=>{
+    const btn = document.createElement('button');
+    btn.id = 'tab_btn_'+t.id;
+    btn.textContent = t.label;
+    btn.style.cssText = 'padding:6px 14px;border:none;border-bottom:2px solid '+(i===0?'#1f6feb':'transparent')+';background:none;color:'+(i===0?'#58a6ff':'#8b949e')+';cursor:pointer;font-size:12px';
+    btn.addEventListener('click', ()=>showTab(t.id));
+    tabBar.appendChild(btn);
+  });
+  dc.appendChild(tabBar);
+
+  // Feeder tab content
+  const feedersDiv = document.createElement('div');
+  feedersDiv.id = 'tab_feeders_content';
+  feedersDiv.innerHTML = `<table><thead><tr>
+    <th>Site</th><th>Population</th><th>Vulnerable pop</th><th>Presumptive/yr</th>
+    <th>NAAT/month</th><th>Device tests/mo</th><th>Utilization</th>
+    <th>Current device</th><th>Recommendation</th><th>NAAT tests saved/mo</th><th>Travel hrs saved/mo</th><th>Wait time impact</th>
+  </tr></thead><tbody>${rows}</tbody></table>
+  <details style="margin-top:10px">
+    <summary style="cursor:pointer;font-size:11px;color:#58a6ff">Show vulnerability breakdown</summary>
+    <table style="margin-top:6px"><thead><tr><th>Category</th><th>Pathway</th><th>Est. count</th><th>To test</th></tr></thead>
+    <tbody>${vulnRows}</tbody></table>
+  </details>`;
+  dc.appendChild(feedersDiv);
+
+  // Scenario 1 tab
+  const s1div = document.createElement('div');
+  s1div.id = 'tab_s1_content';
+  s1div.style.display = 'none';
+  s1div.innerHTML = s1html;
+  dc.appendChild(s1div);
+
+  // Scenario 2 tab
+  const s2div = document.createElement('div');
+  s2div.id = 'tab_s2_content';
+  s2div.style.display = 'none';
+  s2div.innerHTML = s2html;
+  dc.appendChild(s2div);
 
   document.getElementById('detailPanel').style.display = 'block';
-  // Attach tab listeners after innerHTML injection
-  setTimeout(function(){
-    ['feeders','s1','s2'].forEach(function(t){
-      var btn = document.getElementById('tab_'+t);
-      if(btn) btn.addEventListener('click', function(){ showTab(t); });
-    });
-  }, 50);
 }
+
 
 function render(){
   const name = document.getElementById('naatSel').value;
@@ -585,7 +612,7 @@ function buildSel(){
 function showTab(t){
   ['feeders','s1','s2'].forEach(id=>{
     const c = document.getElementById('tab_'+id+'_content');
-    const b = document.getElementById('tab_'+id);
+    const b = document.getElementById('tab_btn_'+id);
     if(c) c.style.display = id===t?'block':'none';
     if(b){
       b.style.color = id===t?'#58a6ff':'#8b949e';
