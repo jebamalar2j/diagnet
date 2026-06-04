@@ -454,6 +454,13 @@ function showDetail(name){
   `;
 
   document.getElementById('detailPanel').style.display = 'block';
+  // Attach tab listeners after innerHTML injection
+  setTimeout(function(){
+    ['feeders','s1','s2'].forEach(function(t){
+      var btn = document.getElementById('tab_'+t);
+      if(btn) btn.addEventListener('click', function(){ showTab(t); });
+    });
+  }, 50);
 }
 
 function render(){
