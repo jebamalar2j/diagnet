@@ -1,0 +1,19 @@
+id,name,district,tu,type,lat,lon,monthly_capacity,current_cases,naat_stock,modules,optimal_monthly,current_monthly,techs,presumptive_tests
+N001,Eranavoor UPHC,Chennai,Thiruvetriyur,NAAT,13.1866,80.3124,912,60,19,2,339,150,2,1818
+N002,Puzhal UPHC,Chennai,Madhavaram,NAAT,13.1645,80.2047,672,32,96,4,329,219,4,4005
+N003,CDH,Chennai,Tondiarpet,NAAT,13.1276,80.2916,528,25,53,2,241,168,3,2204
+N004,Kodungaiyur UPHC,Chennai,Kodungaiyur,NAAT,13.1389,80.2512,480,76,115,3,297,129,1,1892
+N005,Basin Briadge UPHC,Chennai,Basin Bridge,NAAT,13.1046,80.2752,720,30,52,3,203,251,3,2447
+N006,GPH Periyar Nagar,Chennai,Kolathur,NAAT,13.1149,80.2237,240,34,110,2,230,182,3,1644
+N007,Padi Round Building,Chennai,Padi Manjakuppam,NAAT,13.1023,80.1834,240,33,88,3,251,244,4,1563
+N008,ITM,Chennai,Aminjikarai,NAAT,13.0737,80.2495,528,55,73,3,341,229,4,1718
+N009,MMDA UPHC,Chennai,Mmda,NAAT,13.0823,80.2134,240,60,25,4,258,232,1,1176
+N010,Beemanampet UPHC,Chennai,Mylapore,NAAT,13.0489,80.2456,336,36,75,2,324,264,1,833
+N011,Koyembedu UPHC,Chennai,Virugambakkam,NAAT,13.0582,80.193,144,30,63,2,334,264,3,1458
+N012,Kodambakkam UPHC,Chennai,Kodambakkam Tu,NAAT,13.0521,80.2189,288,78,18,4,226,243,2,1446
+N013,ESIC Hospital Kk Nagar,Chennai,Saidapet West,NAAT,13.037,80.2121,384,58,46,3,154,108,3,1857
+N014,Chinnaporur UPHC,Chennai,Porur,NAAT,13.0366,80.1702,336,66,67,2,344,216,2,1455
+N015,Nanganallur UPHC,Chennai,Nanganallur,NAAT,12.9745,80.1815,480,75,82,3,204,218,2,1903
+N016,Adambakkam UPHC,Chennai,Velachery,NAAT,12.9912,80.2119,480,35,33,2,236,85,2,3933
+N017,Jaladiyanpettai UPHC,Chennai,Puzhithivakkam,NAAT,12.9124,80.1967,48,24,70,2,221,251,4,1512
+N018,Palavakkam UPHC,Chennai,Kannagi Nagar,NAAT,12.9609,80.2565,288,54,21,4,296,227,4,2048

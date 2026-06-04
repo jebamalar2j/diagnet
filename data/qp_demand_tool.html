@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>QuantiPlus/Uniamp — NAAT Load Optimiser</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#0d1117;color:#c9d1d9;font-size:13px}
+#layout{display:grid;grid-template-columns:340px 1fr;height:100vh;overflow:hidden}
+#sidebar{overflow-y:auto;padding:12px;background:#0d1117;border-right:1px solid #30363d}
+#mapPane{position:relative}
+#map{width:100%;height:100%}
+h1{font-size:15px;color:#fff;margin-bottom:2px}
+.sub{font-size:10px;color:#666;margin-bottom:10px}
+.ctrl{margin-bottom:10px}
+.lbl{font-size:11px;color:#8b949e;display:block;margin-bottom:3px}
+select,input[type=number]{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:5px;padding:4px 7px;font-size:12px;width:100%}
+input[type=range]{width:100%;accent-color:#1f6feb;margin:4px 0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{background:#161b22;border:1px solid #30363d;border-radius:6px;padding:10px;margin-bottom:8px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.met{background:#161b22;border:1px solid #30363d;border-radius:5px;padding:8px;text-align:center}
+.mv{font-size:17px;font-weight:700}.ml{font-size:10px;color:#8b949e;margin-top:1px}
+.red{color:#f85149}.green{color:#3fb950}.amber{color:#d29922}.blue{color:#58a6ff}.white{color:#fff}
+.alert{border-radius:5px;padding:7px 10px;font-size:11px;font-weight:500;margin-bottom:7px}
+.alert-r{background:#3d0f0f;border:1px solid #f85149;color:#ffa09e}
+.alert-g{background:#0d2615;border:1px solid #3fb950;color:#56d364}
+.alert-a{background:#2d1f00;border:1px solid #d29922;color:#f0c040}
+.badge{padding:1px 6px;border-radius:7px;font-size:10px;font-weight:600;white-space:nowrap;display:inline-block}
+.bn{background:#3d0f0f;color:#ffa09e}
+.bq{background:#0d2615;color:#56d364}
+.bu{background:#0d1f3d;color:#79c0ff}
+.b14{background:#1a1a3d;color:#a0b0ff}
+.b24{background:#2d0d3d;color:#d0a0ff}
+.bchk{background:#2d1f00;color:#f0c040}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:#161b22;padding:4px 6px;text-align:left;color:#8b949e;font-weight:500;border-bottom:1px solid #30363d;white-space:nowrap}
+td{padding:4px 6px;border-bottom:1px solid #21262d;vertical-align:middle}
+.sec-hdr{background:#1c2128;padding:4px 6px;font-size:10px;color:#8b949e;font-weight:600;border-left:2px solid #58a6ff}
+.tip{font-size:10px;color:#666;font-style:italic}
+.bar-wrap{height:8px;background:#21262d;border-radius:4px;overflow:hidden;min-width:40px}
+.bar-fill{height:100%;border-radius:4px}
+.dd-wrap{position:relative}
+.dd-btn{background:#161b22;border:1px solid #30363d;border-radius:5px;padding:4px 8px;color:#c9d1d9;cursor:pointer;font-size:11px;width:100%;text-align:left}
+.dd-btn:after{content:"▼";float:right;font-size:9px;color:#8b949e}
+.dd-menu{display:none;position:absolute;top:100%;left:0;z-index:9999;background:#161b22;border:1px solid #30363d;border-radius:5px;width:100%;max-height:280px;overflow-y:auto;box-shadow:0 8px 20px rgba(0,0,0,.7)}
+.dd-menu.open{display:block}
+.dd-grp{padding:4px 8px 2px;font-size:10px;color:#58a6ff;font-weight:600;background:#1c2128}
+.dd-item{display:flex;align-items:center;gap:6px;padding:4px 8px;cursor:pointer;font-size:11px}
+.dd-item:hover{background:#21262d}
+.dd-item input{accent-color:#238636;width:12px;height:12px;cursor:pointer;flex-shrink:0}
+.dd-actions{display:flex;gap:5px;padding:5px 8px;flex-wrap:wrap}
+.dd-actions button{padding:2px 6px;border-radius:3px;border:1px solid #30363d;background:#21262d;color:#8b949e;cursor:pointer;font-size:10px}
+.pct-btn{padding:3px 8px;border-radius:4px;border:1px solid #30363d;background:#161b22;color:#8b949e;cursor:pointer;font-size:10px;margin:2px}
+.pct-btn.active{background:#238636;color:#fff;border-color:#238636}
+#detailPanel{position:absolute;bottom:0;left:0;right:0;max-height:45%;background:#0d1117;border-top:2px solid #1f6feb;overflow-y:auto;padding:10px;z-index:1000;display:none}
+.leaflet-popup-content-wrapper{background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:6px}
+.leaflet-popup-tip{background:#161b22}
+.leaflet-popup-content{font-size:12px;margin:8px 10px}
+</style>
+</head>
+<body>
+<div id="layout">
+<div id="sidebar">
+  <h1>QuantiPlus / Uniamp Optimiser</h1>
+  <p class="sub">Chennai  ·  18 NAAT hubs  ·  153 sites  ·  Click map pin for details</p>
+
+  <div class="card">
+    <div class="ctrl">
+      <span class="lbl">NAAT hub (or click map)</span>
+      <select id="naatSel" onchange="selectHub(this.value)"></select>
+    </div>
+    <div class="row2">
+      <div class="ctrl">
+        <span class="lbl">Est. prevalence % <input type="number" id="posInp" value="8" min="1" max="40" step="0.5" onchange="document.getElementById('posSlider').value=this.value;render()" style="width:50px;display:inline;margin-left:4px"></span>
+        <input type="range" id="posSlider" min="1" max="40" value="8" step="0.5" oninput="document.getElementById('posInp').value=this.value;render()">
+        <span class="tip">Positivity at peripheral sites</span>
+      </div>
+      <div class="ctrl">
+        <span class="lbl">Work days/month</span>
+        <input type="number" id="wdInp" value="26" min="1" max="31" onchange="render()" style="">
+      </div>
+    </div>
+    <div class="row2">
+      <div class="ctrl">
+        <span class="lbl">NAAT choke threshold</span>
+        <input type="number" id="thrInp" value="240" onchange="render()">
+      </div>
+      <div class="ctrl">
+        <span class="lbl">Overlap deduction %</span>
+        <input type="number" id="ovInp" value="20" min="0" max="50" onchange="render()">
+      </div>
+    </div>
+    <div class="ctrl">
+      <span class="lbl">Vulnerable categories</span>
+      <div class="dd-wrap" id="ddWrap">
+        <button class="dd-btn" onclick="toggleDD(event)" id="ddBtn">All categories selected</button>
+        <div class="dd-menu" id="ddMenu">
+          <div class="dd-actions">
+            <button onclick="selectAll()">All</button>
+            <button onclick="selectNone()">None</button>
+            <button onclick="selectGrp('Clinical-NAAT')">NAAT direct</button>
+            <button onclick="selectGrp('qp')">QP/Uniamp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ctrl">
+      <span class="lbl">% of vulnerable to test (symptomatic always 100%)</span>
+      <div>
+        <button class="pct-btn" onclick="setPct(10,this)">10%</button>
+        <button class="pct-btn active" onclick="setPct(20,this)">20%</button>
+        <button class="pct-btn" onclick="setPct(30,this)">30%</button>
+        <button class="pct-btn" onclick="setPct(50,this)">50%</button>
+        <button class="pct-btn" onclick="setPct(100,this)">100%</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="metrics" id="mets"></div>
+  <div id="alerts"></div>
+  <div id="predBox"></div>
+
+  <div style="margin-top:8px">
+    <p style="font-size:11px;font-weight:600;color:#8b949e;margin-bottom:5px">Map legend</p>
+    <div style="font-size:11px;color:#8b949e;line-height:2">
+      <span style="color:#ff4444">&#9632;</span> NAAT hub — choked (&gt;threshold)<br>
+      <span style="color:#3fb950">&#9632;</span> NAAT hub — OK<br>
+      <span style="color:#58a6ff">&#9679;</span> Feeder — Uniamp deployed<br>
+      <span style="color:#d29922">&#9679;</span> Feeder — device recommended<br>
+      <span style="color:#555">&#9679;</span> Feeder — low volume, monitor<br>
+      Shaded area = NAAT hub catchment
+    </div>
+  </div>
+</div>
+
+<div id="mapPane">
+  <div id="map"></div>
+  <div id="detailPanel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <span style="font-size:13px;font-weight:600;color:#fff" id="detailTitle"></span>
+      <button onclick="document.getElementById('detailPanel').style.display='none'" style="background:#30363d;border:none;color:#ccc;padding:3px 8px;border-radius:4px;cursor:pointer">✕ close</button>
+    </div>
+    <div id="detailContent"></div>
+  </div>
+</div>
+</div>
+
+<script>
+const NAAT_DATA = [{"name": "Eranavoor UPHC", "tu": "Thiruvetriyur", "feeders": [{"name": "Thangal Uphc", "type": "UPHC", "population": 55111, "presumptive": 844, "has_uniamp": true, "has_naat": false, "lat": 13.1882, "lon": 80.3089}, {"name": "HWC Annai sivagami nagar (Div3)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.190783, "lon": 80.29815}, {"name": "HWC Ondikuppam Tnuhb ( Dhobikana) div-14", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.179851, "lon": 80.304096}, {"name": "HWC Pattithar Kovil Market (div 9)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.193694, "lon": 80.317701}, {"name": "HWC Ramasamy Nagar (div7)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.198365, "lon": 80.300008}, {"name": "HWC Srirangam Newtown (div5)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.184258, "lon": 80.298294}, {"name": "HWC Thalan kuppam(div1)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.178159, "lon": 80.312561}, {"name": "HWC Varadharaja Perumal Kovil Street (div13)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.172396, "lon": 80.303365}, {"name": "HWC West Mada Street (div 10)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.191097, "lon": 80.313748}, {"name": "kathivakkam UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.178213, "lon": 80.315078}, {"name": "kuppam UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.195883, "lon": 80.297595}, {"name": "Poongavanapuram UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.195775, "lon": 80.318344}, {"name": "Sathankadu UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.181808, "lon": 80.302064}, {"name": "SUGAM HOSPITAL", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 13.200316, "lon": 80.307498}, {"name": "THIRUVETRIYUR GH", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.174382, "lon": 80.300301}, {"name": "ADYAR UCHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.197025, "lon": 80.315512}, {"name": "ADYAR UPHC (BESANT NAGAR UPHC)", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.195814, "lon": 80.319292}, {"name": "HWC-171-KAMARAJAR SALAI", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.187687, "lon": 80.326593}, {"name": "MANDAVELI UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.182956, "lon": 80.313961}], "total_feeders": 19, "uniamp_count": 1, "no_uniamp_count": 18, "total_pop": 710111, "total_presumptive": 1818, "lat": 13.1866, "lon": 80.3124}, {"name": "Puzhal UPHC", "tu": "Madhavaram", "feeders": [{"name": "Lakshmipuram Uphc", "type": "UPHC", "population": 71110, "presumptive": 2200, "has_uniamp": true, "has_naat": false, "lat": 13.1587, "lon": 80.2311}, {"name": "Samy Nagar Uphc", "type": "UPHC", "population": 70420, "presumptive": 1316, "has_uniamp": true, "has_naat": false, "lat": 13.1502, "lon": 80.2198}, {"name": "ARUL NAGAR HWC 27", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.174382, "lon": 80.208256}, {"name": "ASHOKA STREET HWC 33", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.175351, "lon": 80.207021}, {"name": "Corporation EMS street HWC 24", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.170637, "lon": 80.191075}, {"name": "KANNABIRAN UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.156337, "lon": 80.198382}, {"name": "KANNAPPA STREET HWC 28", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.151894, "lon": 80.196684}, {"name": "KATHIRVEDU HWC 31", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.15253, "lon": 80.198039}, {"name": "Kosamani street HWC 23", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.168571, "lon": 80.200645}, {"name": "MADHAVARAM GH", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.160605, "lon": 80.195985}, {"name": "Pukraj nagar HWC 25", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.157509, "lon": 80.2178}, {"name": "PUTHAGARAM HWC 32", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.168941, "lon": 80.207974}, {"name": "Srinivasan perumal kovil street HWC26", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.154634, "lon": 80.211574}, {"name": "THANIKACHALAM NAGAR HWC 30", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.154402, "lon": 80.201084}], "total_feeders": 14, "uniamp_count": 2, "no_uniamp_count": 12, "total_pop": 471530, "total_presumptive": 4005, "lat": 13.1645, "lon": 80.2047}, {"name": "CDH", "tu": "Tondiarpet", "feeders": [{"name": "Korrukupet Uphc", "type": "UPHC", "population": 41642, "presumptive": 1646, "has_uniamp": true, "has_naat": false, "lat": 13.1241, "lon": 80.2934}, {"name": "Annai Sathya Nagar HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.142286, "lon": 80.2958}, {"name": "CHERIAN NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.129308, "lon": 80.297138}, {"name": "GOVT. PERIPHERAL HOSPITAL", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 13.137886, "lon": 80.29988}, {"name": "JEEVA NAGAR SOUTH", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.119471, "lon": 80.277563}, {"name": "KASIMA NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.122064, "lon": 80.284632}, {"name": "Poondithangammal Street HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.118929, "lon": 80.304887}, {"name": "Ranganathapuram Slum HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.138891, "lon": 80.28604}, {"name": "Singaravelan Nagar Pallam Paguthi HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.132263, "lon": 80.288469}, {"name": "V.O.C. Nagar UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.140036, "lon": 80.290366}, {"name": "VOC Nagar Tsunami Quarters HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.120546, "lon": 80.283999}], "total_feeders": 11, "uniamp_count": 1, "no_uniamp_count": 10, "total_pop": 416642, "total_presumptive": 2204, "lat": 13.1276, "lon": 80.2916}, {"name": "Kodungaiyur UPHC", "tu": "Kodungaiyur", "feeders": [{"name": "Sharma Nagar", "type": "UPHC", "population": 58236, "presumptive": 1484, "has_uniamp": true, "has_naat": false, "lat": 13.1367, "lon": 80.2456}, {"name": "ECHS Polyclinic Chennai", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.140741, "lon": 80.244082}, {"name": "Indragandhi Nagar Hwc", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.141438, "lon": 80.263135}, {"name": "mdu_dist_cnn", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.135882, "lon": 80.24278}, {"name": "MKB nagar HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.153826, "lon": 80.251486}, {"name": "Muthamizh nagar HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.126627, "lon": 80.237613}, {"name": "Nethaji Nagar 6Th Street", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.127189, "lon": 80.255023}, {"name": "R K NAGAR NORTH HP", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.147662, "lon": 80.248865}, {"name": "Venkateshwaranagar Hwc", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.125806, "lon": 80.247649}, {"name": "VYASERPADI EAST", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.153784, "lon": 80.252073}], "total_feeders": 10, "uniamp_count": 1, "no_uniamp_count": 9, "total_pop": 333236, "total_presumptive": 1892, "lat": 13.1389, "lon": 80.2512}, {"name": "Basin Briadge UPHC", "tu": "Basin Bridge", "feeders": [{"name": "BRN Garden UPHC", "type": "UPHC", "population": 49394, "presumptive": 1681, "has_uniamp": true, "has_naat": false, "lat": 13.1089, "lon": 80.2812}, {"name": "Amman Koil South", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.118732, "lon": 80.286023}, {"name": "BBD (HWC)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.089944, "lon": 80.281822}, {"name": "BRN Garden", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.110051, "lon": 80.276309}, {"name": "BRN Garden (HWC)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.097605, "lon": 80.279429}, {"name": "Chennai port authority hospital", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 13.092947, "lon": 80.273243}, {"name": "Harbour", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.103212, "lon": 80.288814}, {"name": "Harbour(HWC)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.115876, "lon": 80.268102}, {"name": "Perumal Koil Garden", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.104618, "lon": 80.26556}, {"name": "PKG (HWC)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.116979, "lon": 80.286316}, {"name": "Seven wells", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.098553, "lon": 80.279368}, {"name": "Seven wells (HWC)", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.107869, "lon": 80.264785}, {"name": "Harbour Uphc", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.112475, "lon": 80.276381}, {"name": "MUTHIYALPET UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.112959, "lon": 80.276111}, {"name": "UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.089617, "lon": 80.269925}], "total_feeders": 15, "uniamp_count": 1, "no_uniamp_count": 14, "total_pop": 564394, "total_presumptive": 2447, "lat": 13.1046, "lon": 80.2752}, {"name": "GPH Periyar Nagar", "tu": "Kolathur", "feeders": [{"name": "Kolathur Uphc", "type": "UPHC", "population": 50522, "presumptive": 1436, "has_uniamp": true, "has_naat": false, "lat": 13.1149, "lon": 80.2237}, {"name": "Anjugam Nagar UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.100484, "lon": 80.236573}, {"name": "GKM Colony UPHC (Nagammaiyar North)", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.126262, "lon": 80.23365}, {"name": "Makkaram Thottam UHWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.109125, "lon": 80.210438}, {"name": "School Road UHWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.12624, "lon": 80.237108}], "total_feeders": 5, "uniamp_count": 1, "no_uniamp_count": 4, "total_pop": 190522, "total_presumptive": 1644, "lat": 13.1149, "lon": 80.2237}, {"name": "Padi Round Building", "tu": "Padi Manjakuppam", "feeders": [{"name": "Veeramamunivar UPHC (mugapair east)", "type": "UPHC", "population": 66000, "presumptive": 1325, "has_uniamp": true, "has_naat": false, "lat": 13.0987, "lon": 80.1923}, {"name": "ATHIPET uphc", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.08987, "lon": 80.18298}, {"name": "Health and Wellness centre - Athipet", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.089376, "lon": 80.191218}, {"name": "MOGAPPAIR UPHC - MOGAPPAIR WEST UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.110275, "lon": 80.172252}, {"name": "PADI MANJAKUPPAM UCHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.101558, "lon": 80.184894}], "total_feeders": 5, "uniamp_count": 1, "no_uniamp_count": 4, "total_pop": 226000, "total_presumptive": 1563, "lat": 13.1023, "lon": 80.1834}, {"name": "ITM", "tu": "Aminjikarai", "feeders": [{"name": "Chetpet Uphc", "type": "UPHC", "population": 40005, "presumptive": 1085, "has_uniamp": true, "has_naat": false, "lat": 13.0726, "lon": 80.2378}, {"name": "Aminjikarai East / AZADNAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.066652, "lon": 80.260673}, {"name": "HEALTH AND WELLNESS CENTER AZAD NAGAR", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.071394, "lon": 80.240854}, {"name": "Helth and wellness center Purasaivakkam", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.074879, "lon": 80.256398}, {"name": "Institute of Child Health and Hospital", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 13.064735, "lon": 80.243851}, {"name": "Intermediate Reference Laboratory (IRL)", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.088554, "lon": 80.253996}, {"name": "IOG", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.071843, "lon": 80.250027}, {"name": "KILPAUK UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.06233, "lon": 80.241241}, {"name": "mangalapuram Uphc", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.068843, "lon": 80.252149}, {"name": "Purasawalkam UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.065603, "lon": 80.241107}, {"name": "Shenoy Nagar EOC", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.06083, "lon": 80.253433}], "total_feeders": 11, "uniamp_count": 1, "no_uniamp_count": 10, "total_pop": 465005, "total_presumptive": 1718, "lat": 13.0737, "lon": 80.2495}, {"name": "MMDA UPHC", "tu": "Mmda", "feeders": [{"name": "Bharathipuram Uphc", "type": "UPHC", "population": 40350, "presumptive": 900, "has_uniamp": true, "has_naat": false, "lat": 13.0834, "lon": 80.2112}, {"name": "Aminjikarai West / NADUVANKARAI HP", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.074168, "lon": 80.225563}, {"name": "ANNA PERIPHERAL HOSPITAL", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 13.093089, "lon": 80.200526}, {"name": "HEALTH AND WELLNESS  PANNEER SELVAM NAGAR", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.07444, "lon": 80.218469}, {"name": "Panner Selvam nagar UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.073727, "lon": 80.202369}], "total_feeders": 5, "uniamp_count": 1, "no_uniamp_count": 4, "total_pop": 225350, "total_presumptive": 1176, "lat": 13.0823, "lon": 80.2134}, {"name": "Beemanampet UPHC", "tu": "Mylapore", "feeders": [{"name": "Krishnampet Uphc", "type": "UPHC", "population": 37184, "presumptive": 506, "has_uniamp": true, "has_naat": false, "lat": 13.0456, "lon": 80.2534}, {"name": "Mylapore Health Wellness Centre 124", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.061965, "lon": 80.247731}, {"name": "MYLAPORE UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.04808, "lon": 80.254139}, {"name": "R.A.puram Health and wellness centre Div-126", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.058125, "lon": 80.236312}, {"name": "R.A.PURAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.036808, "lon": 80.243532}, {"name": "Santhome Health and wellness centre Div 125", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.046607, "lon": 80.244611}, {"name": "SANTHOME UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.055772, "lon": 80.250801}], "total_feeders": 7, "uniamp_count": 1, "no_uniamp_count": 6, "total_pop": 257184, "total_presumptive": 833, "lat": 13.0489, "lon": 80.2456}, {"name": "Koyembedu UPHC", "tu": "Virugambakkam", "feeders": [{"name": "Virugambakkam Uphc", "type": "UPHC", "population": 55252, "presumptive": 1354, "has_uniamp": true, "has_naat": false, "lat": 13.0567, "lon": 80.1978}, {"name": "DASARATHAPURAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.072725, "lon": 80.180953}, {"name": "Health and Wellness Centre 128 virugambakkam", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.055279, "lon": 80.188179}], "total_feeders": 3, "uniamp_count": 1, "no_uniamp_count": 2, "total_pop": 125252, "total_presumptive": 1458, "lat": 13.0582, "lon": 80.193}, {"name": "Kodambakkam UPHC", "tu": "Kodambakkam Tu", "feeders": [{"name": "K.K. Nagar UPHC", "type": "UPHC", "population": 52260, "presumptive": 1141, "has_uniamp": true, "has_naat": false, "lat": 13.0389, "lon": 80.2123}, {"name": "Health and Wellness Centre sivalingapuram 136", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.06295, "lon": 80.21136}, {"name": "K K NAGAR/ SALIGRAMMAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.042806, "lon": 80.217358}, {"name": "NESAPAKKAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.049756, "lon": 80.212256}, {"name": "VADAPALANI UCHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.044594, "lon": 80.231598}, {"name": "VADAPALANI WEST UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.050394, "lon": 80.22974}], "total_feeders": 6, "uniamp_count": 1, "no_uniamp_count": 5, "total_pop": 257260, "total_presumptive": 1446, "lat": 13.0521, "lon": 80.2189}, {"name": "ESIC Hospital Kk Nagar", "tu": "Saidapet West", "feeders": [{"name": "Ragava Colony UPHC ", "type": "UPHC", "population": 50460, "presumptive": 1365, "has_uniamp": true, "has_naat": false, "lat": 13.03851, "lon": 80.198618}, {"name": "ASHOK NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.051978, "lon": 80.222181}, {"name": "Health and wellness center 138 Annai Sathya Nagar,", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.05107, "lon": 80.224891}, {"name": "JAFFERKHANPET UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.047461, "lon": 80.202089}, {"name": "KUMARAN NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.036569, "lon": 80.203512}, {"name": "Peripheral Hospital, KK Nagar", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 13.034031, "lon": 80.198859}, {"name": "Ragavan colony UPHC/SAIDAPET WEST UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.033369, "lon": 80.226659}, {"name": "SAIDAPET UPHC/JONES ROAD", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.029956, "lon": 80.220622}], "total_feeders": 8, "uniamp_count": 1, "no_uniamp_count": 7, "total_pop": 380460, "total_presumptive": 1857, "lat": 13.037, "lon": 80.2121}, {"name": "Chinnaporur UPHC", "tu": "Porur", "feeders": [{"name": "Sakthinagar UPHC", "type": "UPHC", "population": 87120, "presumptive": 1158, "has_uniamp": true, "has_naat": false, "lat": 13.0378, "lon": 80.1712}, {"name": "HWC -DIV 150-KARAMBAKKAM HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.03525, "lon": 80.16789}, {"name": "HWC -DIV 153- SAKTHI NAGAR HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.05032, "lon": 80.185063}, {"name": "HWC-DIV 154-RAMAPURAM HWC", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 13.038273, "lon": 80.176752}, {"name": "mdu_dist_cnw", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 13.026244, "lon": 80.164101}, {"name": "RAMAPURAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.050661, "lon": 80.172575}, {"name": "SAKTHI NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.037866, "lon": 80.177639}], "total_feeders": 7, "uniamp_count": 1, "no_uniamp_count": 6, "total_pop": 287120, "total_presumptive": 1455, "lat": 13.0366, "lon": 80.1702}, {"name": "Nanganallur UPHC", "tu": "Nanganallur", "feeders": [{"name": "Appavu Street UPHC", "type": "UPHC", "population": 52062, "presumptive": 1314, "has_uniamp": true, "has_naat": false, "lat": 12.9812, "lon": 80.1923}, {"name": "ADAMBAKKAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.961215, "lon": 80.184025}, {"name": "CONTONMENT HOSPITAL", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 12.974586, "lon": 80.192082}, {"name": "HWC-DIV 156-MADHANANDHAPURAM", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.964223, "lon": 80.195323}, {"name": "HWC-DIV 157-MANAPAKKAM", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.961903, "lon": 80.172075}, {"name": "HWC-DIV 158-NANDAMBAKKAM", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.977351, "lon": 80.186756}, {"name": "HWC-DIV 162-ALANDUR", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.966556, "lon": 80.170097}, {"name": "MILITARY HOSPITAL CHENNAI", "type": "PHI", "population": 80000, "presumptive": 120, "has_uniamp": false, "has_naat": false, "lat": 12.986209, "lon": 80.173886}, {"name": "MUGALIVAKKAM UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.977336, "lon": 80.185081}, {"name": "PALAVANTHANGAL UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.972077, "lon": 80.18401}], "total_feeders": 10, "uniamp_count": 1, "no_uniamp_count": 9, "total_pop": 447062, "total_presumptive": 1903, "lat": 12.9745, "lon": 80.1815}, {"name": "Adambakkam UPHC", "tu": "Velachery", "feeders": [{"name": "Sasthri Nagar UPHC", "type": "UPHC", "population": 57745, "presumptive": 1740, "has_uniamp": true, "has_naat": false, "lat": 12.9934, "lon": 80.2134}, {"name": "Taramani UPHC ", "type": "UPHC", "population": 54051, "presumptive": 1762, "has_uniamp": true, "has_naat": false, "lat": 12.991883, "lon": 80.224941}, {"name": "HWC-DIV 177-Orandiamman kovil street", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.982328, "lon": 80.218386}, {"name": "HWC-DIV 178-Bharathi street- Taramani", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.983361, "lon": 80.208774}, {"name": "HWC-DIV-176-Krishnaraja  4th street", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.996351, "lon": 80.2059}, {"name": "mdu_dist_cns", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 12.985685, "lon": 80.219456}, {"name": "Old Siddha Clinic/MADUVANKARAI UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.978376, "lon": 80.210649}, {"name": "SASTRI NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 13.006154, "lon": 80.226783}, {"name": "SEVA NAGAR UPHC (VELACHERY UPHC)", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.978398, "lon": 80.203295}, {"name": "Sri Ramakrishna Vivekananda/THARAMANI UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.984156, "lon": 80.224898}], "total_feeders": 10, "uniamp_count": 2, "no_uniamp_count": 8, "total_pop": 401796, "total_presumptive": 3933, "lat": 12.9912, "lon": 80.2119}, {"name": "Jaladiyanpettai UPHC", "tu": "Puzhithivakkam", "feeders": [{"name": "Puzhithivakkam UPHC", "type": "UPHC", "population": 65214, "presumptive": 1512, "has_uniamp": true, "has_naat": false, "lat": 12.9245, "lon": 80.1978}], "total_feeders": 1, "uniamp_count": 1, "no_uniamp_count": 0, "total_pop": 65214, "total_presumptive": 1512, "lat": 12.9124, "lon": 80.1967}, {"name": "Palavakkam UPHC", "tu": "Kannagi Nagar", "feeders": [{"name": "Neelangkarai UPHC", "type": "UPHC", "population": 70248, "presumptive": 1773, "has_uniamp": true, "has_naat": false, "lat": 12.9523, "lon": 80.2423}, {"name": "HWC-195- EZHIL NAGAR", "type": "PHI", "population": 25000, "presumptive": 37, "has_uniamp": false, "has_naat": false, "lat": 12.972326, "lon": 80.267878}, {"name": "INJAMBAKKAM UCHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.956986, "lon": 80.246232}, {"name": "Kabaleeswarar Nagar(Neelangarai)", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 12.970912, "lon": 80.262606}, {"name": "KANNGI NAGAR UPHC", "type": "PHI", "population": 45000, "presumptive": 67, "has_uniamp": false, "has_naat": false, "lat": 12.96425, "lon": 80.271117}, {"name": "Thoraipakkam", "type": "PHI", "population": 35000, "presumptive": 52, "has_uniamp": false, "has_naat": false, "lat": 12.965519, "lon": 80.241735}], "total_feeders": 6, "uniamp_count": 1, "no_uniamp_count": 5, "total_pop": 255248, "total_presumptive": 2048, "lat": 12.9609, "lon": 80.2565}];
+
+const CATS = [
+  {id:"symptomatic",name:"Symptomatic OPD",grp:"Symptomatic",pathway:"qp",popFrac:0.015,overlap:false,alwaysTest:true},
+  {id:"pediatric",name:"Paediatric symptomatic ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.003,overlap:false,naat_direct:true},
+  {id:"eptb",name:"Suspected EPTB ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.002,overlap:false,naat_direct:true},
+  {id:"plhiv",name:"PLHIV ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.005,overlap:true,naat_direct:true},
+  {id:"prev_tb",name:"Previously treated TB ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.003,overlap:false,naat_direct:true},
+  {id:"dr_contact",name:"DR-TB contacts ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.001,overlap:false,naat_direct:true},
+  {id:"anti_tnf",name:"Anti-TNF ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.002,overlap:false,naat_direct:true},
+  {id:"dialysis",name:"Dialysis ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.002,overlap:true,naat_direct:true},
+  {id:"transplant",name:"Transplantation ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.001,overlap:false,naat_direct:true},
+  {id:"cancer",name:"Cancer ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.003,overlap:false,naat_direct:true},
+  {id:"renal",name:"Renal Impairment ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.004,overlap:true,naat_direct:true},
+  {id:"liver",name:"Liver Impairment ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.003,overlap:true,naat_direct:true},
+  {id:"palliative",name:"Palliative/Immunosuppressed ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.002,overlap:false,naat_direct:true},
+  {id:"silica",name:"Silica exposure ⚡",grp:"Clinical-NAAT",pathway:"naat",popFrac:0.003,overlap:false,naat_direct:true},
+  {id:"diabetes",name:"Diabetes",grp:"Existing",pathway:"qp",popFrac:0.08,overlap:true},
+  {id:"hypertensive",name:"Hypertensive",grp:"Existing",pathway:"qp",popFrac:0.12,overlap:true},
+  {id:"asthma",name:"Bronchial Asthma",grp:"Existing",pathway:"qp",popFrac:0.04,overlap:false},
+  {id:"copd",name:"COPD",grp:"Existing",pathway:"qp",popFrac:0.03,overlap:false},
+  {id:"cvd",name:"Cardiovascular Disorder",grp:"Existing",pathway:"qp",popFrac:0.05,overlap:true},
+  {id:"tb_contacts",name:"TB Contacts",grp:"Existing",pathway:"qp",popFrac:0.008,overlap:false},
+  {id:"covid_rec",name:"COVID recovered",grp:"Existing",pathway:"qp",popFrac:0.06,overlap:false},
+  {id:"hcw",name:"Healthcare Workers",grp:"Existing",pathway:"qp",popFrac:0.005,overlap:false},
+  {id:"migrant",name:"Migrant",grp:"Existing",pathway:"qp",popFrac:0.03,overlap:false},
+  {id:"miner",name:"Miner",grp:"Existing",pathway:"qp",popFrac:0.002,overlap:false},
+  {id:"prison",name:"Prison",grp:"Existing",pathway:"qp",popFrac:0.001,overlap:false},
+  {id:"urban_slum",name:"Urban Slum",grp:"Existing",pathway:"qp",popFrac:0.15,overlap:false},
+  {id:"pregnancy",name:"Pregnancy",grp:"Existing",pathway:"qp",popFrac:0.015,overlap:false},
+  {id:"lactating",name:"Lactating mother",grp:"Existing",pathway:"qp",popFrac:0.015,overlap:false},
+  {id:"illegal_imm",name:"Illegal Immigrant",grp:"Existing",pathway:"qp",popFrac:0.005,overlap:false},
+  {id:"bcg",name:"H/o Adult BCG",grp:"Existing",pathway:"qp",popFrac:0.01,overlap:false},
+  {id:"elderly",name:"Elderly 60+",grp:"New",pathway:"qp",popFrac:0.09,overlap:true},
+  {id:"undernutrition",name:"Undernourished (BMI<18.5)",grp:"New",pathway:"qp",popFrac:0.06,overlap:true},
+  {id:"tobacco",name:"Tobacco/Smoker",grp:"New",pathway:"qp",popFrac:0.12,overlap:false},
+  {id:"alcohol",name:"Substance abuse",grp:"New",pathway:"qp",popFrac:0.03,overlap:false},
+  {id:"workplace",name:"Workplace exposed",grp:"New",pathway:"qp",popFrac:0.015,overlap:false},
+  {id:"construction",name:"Construction worker",grp:"New",pathway:"qp",popFrac:0.02,overlap:false},
+  {id:"tea_garden",name:"Tea garden worker",grp:"New",pathway:"qp",popFrac:0.002,overlap:false},
+  {id:"congregate",name:"Congregate settings",grp:"New",pathway:"qp",popFrac:0.005,overlap:false},
+  {id:"de_addiction",name:"De-addiction attendees",grp:"New",pathway:"qp",popFrac:0.008,overlap:false},
+  {id:"indoor_poll",name:"Indoor air pollution",grp:"New",pathway:"qp",popFrac:0.08,overlap:false},
+  {id:"tribal",name:"Tribal (PVTG/Non-PVTG)",grp:"New",pathway:"qp",popFrac:0.005,overlap:false},
+  {id:"homeless",name:"Homeless/Shelter home",grp:"New",pathway:"qp",popFrac:0.002,overlap:false},
+  {id:"lgbtqai",name:"LGBTQAI++",grp:"New",pathway:"qp",popFrac:0.01,overlap:false},
+  {id:"marginalized",name:"Marginalized at risk of HIV",grp:"New",pathway:"qp",popFrac:0.01,overlap:false},
+];
+
+let selectedCats = new Set(CATS.map(c=>c.id));
+let vulnPct = 20;
+let map, catchmentLayer = null, feederMarkers = [], naatMarkers = [];
+let currentHub = null;
+
+// Hub colors
+const HUB_COLORS = ['#e74c3c','#3498db','#2ecc71','#f39c12','#9b59b6',
+  '#1abc9c','#e67e22','#e91e63','#00bcd4','#ff5722',
+  '#607d8b','#795548','#8bc34a','#ff9800','#673ab7',
+  '#009688','#f44336','#2196f3'];
+
+function getPosVal(){ return parseFloat(document.getElementById('posInp').value)||8; }
+function getWD(){ return parseInt(document.getElementById('wdInp').value)||26; }
+function getThr(){ return parseInt(document.getElementById('thrInp').value)||240; }
+function getOv(){ return parseInt(document.getElementById('ovInp').value)||20; }
+
+function calcSite(pop, presumptive, pos, ovPct){
+  let sympTests = presumptive;
+  let vulnNAAT=0, vulnQP=0, overlapSum=0, totalVuln=0;
+  CATS.forEach(cat=>{
+    if(!selectedCats.has(cat.id)) return;
+    if(cat.grp==='Symptomatic') return;
+    const count = Math.round(pop * cat.popFrac);
+    const pct = (cat.alwaysTest||cat.naat_direct) ? 100 : vulnPct;
+    const toTest = Math.round(count * pct/100);
+    if(cat.overlap) overlapSum += toTest;
+    totalVuln += count;
+    if(cat.pathway==='naat') vulnNAAT += toTest;
+    else vulnQP += toTest;
+  });
+  const overlap = Math.round(overlapSum * ovPct/100);
+  const adjNAAT = Math.max(0, vulnNAAT - Math.round(overlap*0.4));
+  const adjQP   = Math.max(0, vulnQP   - Math.round(overlap*0.6));
+  const monthlyNAAT = Math.round((adjNAAT + sympTests*(pos/100)) / 12);
+  const monthlyQP   = Math.round(adjQP / 12);
+  return {monthlyNAAT, monthlyQP, sympTests, totalVuln, adjNAAT, adjQP};
+}
+
+function suggestDev(mQP, wd){
+  const u=10*wd, q14=14*wd, q24=24*wd;
+  if(mQP<=u)   return {dev:'Uniamp',  cap:u,   badge:'bu',  color:'#58a6ff'};
+  if(mQP<=q14) return {dev:'QP-14',   cap:q14, badge:'b14', color:'#a0b0ff'};
+  return           {dev:'QP-24',   cap:q24, badge:'b24', color:'#d0a0ff'};
+}
+
+function vulnBreakdown(pop){
+  let rows = '';
+  const grps = ['Symptomatic','Clinical-NAAT','Existing','New'];
+  grps.forEach(grp=>{
+    const gc = CATS.filter(c=>c.grp===grp && selectedCats.has(c.id));
+    if(!gc.length) return;
+    rows += `<tr><td colspan="4" class="sec-hdr">${grp==='Clinical-NAAT'?'Clinical — NAAT direct':grp}</td></tr>`;
+    gc.forEach(cat=>{
+      const count = Math.round(pop * cat.popFrac);
+      const pct = (cat.alwaysTest||cat.naat_direct) ? 100 : vulnPct;
+      const toTest = Math.round(count*pct/100);
+      rows += `<tr>
+        <td style="color:#ccc;font-size:11px">${cat.name}</td>
+        <td>${cat.pathway==='naat'?'<span class="badge bn">NAAT</span>':'<span class="badge bq">QP</span>'}</td>
+        <td>${count.toLocaleString()}</td>
+        <td style="font-weight:600;color:${cat.pathway==='naat'?'#f85149':'#3fb950'}">${toTest.toLocaleString()}</td>
+      </tr>`;
+    });
+  });
+  return rows;
+}
+
+// Map init
+function initMap(){
+  map = L.map('map').setView([13.06, 80.24], 11);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'© OpenStreetMap',maxZoom:18
+  }).addTo(map);
+  drawAllMarkers();
+}
+
+function drawAllMarkers(){
+  // Clear existing
+  feederMarkers.forEach(m=>map.removeLayer(m));
+  naatMarkers.forEach(m=>map.removeLayer(m));
+  feederMarkers=[]; naatMarkers=[];
+
+  const pos = getPosVal(), wd = getWD(), thr = getThr(), ovPct = getOv();
+
+  NAAT_DATA.forEach((hub, hi)=>{
+    let aggNAAT=0;
+    hub.feeders.forEach(f=>{
+      const r = calcSite(f.population, f.presumptive, pos, ovPct);
+      aggNAAT += r.monthlyNAAT;
+    });
+    const choked = aggNAAT > thr;
+    const color = choked ? '#f85149' : '#3fb950';
+    const hubColor = HUB_COLORS[hi % HUB_COLORS.length];
+
+    // NAAT hub marker — square-ish using divIcon
+    const naatIcon = L.divIcon({
+      html: `<div style="position:relative;width:24px;height:32px">
+        <div style="width:24px;height:24px;background:${color};border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 6px rgba(0,0,0,.5)"></div>
+        <div style="position:absolute;top:6px;left:6px;width:10px;height:10px;background:#fff;border-radius:50%;transform:none;opacity:0.9"></div>
+      </div>`,
+      className:'', iconAnchor:[12,32]
+    });
+    const nm = L.marker([hub.lat, hub.lon], {icon:naatIcon})
+      .addTo(map)
+      .bindPopup(`<b>${hub.name}</b><br>TU: ${hub.tu}<br>Feeders: ${hub.total_feeders}<br>NAAT/month: <b style="color:${color}">${aggNAAT.toLocaleString()}</b><br><span style="color:${choked?'#f85149':'#3fb950'}">${choked?'CHOKED':'Within capacity'}</span>`)
+      .on('click', ()=>{ selectHub(hub.name); });
+    naatMarkers.push(nm);
+
+    // Feeder markers
+    hub.feeders.forEach(f=>{
+      const fr = calcSite(f.population, f.presumptive, pos, ovPct);
+      const s = suggestDev(fr.monthlyQP, wd);
+      const fColor = f.has_uniamp ? '#58a6ff' : fr.monthlyNAAT > thr*0.1 ? '#d29922' : '#444';
+      const fIcon = L.circleMarker([f.lat, f.lon], {
+        radius:6, color:fColor, fillColor:fColor, fillOpacity:0.85, weight:1.5
+      });
+      fIcon.addTo(map)
+        .bindPopup(`<b>${f.name}</b><br>Pop: ${f.population.toLocaleString()}<br>Presumptive/yr: ${f.presumptive.toLocaleString()}<br>NAAT contrib: <b>${fr.monthlyNAAT}/month</b><br>Device: ${f.has_uniamp?'<b style="color:#58a6ff">Uniamp deployed</b>':'<b style="color:#d29922">'+s.dev+' recommended</b>'}`);
+      feederMarkers.push({marker:fIcon, hub:hub.name});
+    });
+  });
+}
+
+function selectHub(name){
+  document.getElementById('naatSel').value = name;
+  currentHub = name;
+  render();
+  highlightCatchment(name);
+  showDetail(name);
+  // Pan map
+  const hub = NAAT_DATA.find(h=>h.name===name);
+  if(hub) map.setView([hub.lat, hub.lon], 13);
+}
+
+function highlightCatchment(name){
+  if(catchmentLayer){ map.removeLayer(catchmentLayer); catchmentLayer=null; }
+  const hub = NAAT_DATA.find(h=>h.name===name);
+  if(!hub) return;
+  const pos = getPosVal(), wd=getWD(), thr=getThr(), ovPct=getOv();
+
+  const allPts = [[hub.lat, hub.lon], ...hub.feeders.map(f=>[f.lat,f.lon])];
+  const hi = NAAT_DATA.indexOf(hub);
+  const hc = HUB_COLORS[hi % HUB_COLORS.length];
+
+  // Convex hull using Gift Wrapping algorithm
+  function cross(o,a,b){ return (a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]); }
+  function convexHull(pts){
+    const p = [...pts].sort((a,b)=>a[0]-b[0]||a[1]-b[1]);
+    if(p.length<3) return p;
+    const lower=[], upper=[];
+    for(let pt of p){ while(lower.length>=2&&cross(lower[lower.length-2],lower[lower.length-1],pt)<=0)lower.pop(); lower.push(pt); }
+    for(let i=p.length-1;i>=0;i--){ const pt=p[i]; while(upper.length>=2&&cross(upper[upper.length-2],upper[upper.length-1],pt)<=0)upper.pop(); upper.push(pt); }
+    upper.pop(); lower.pop();
+    return lower.concat(upper);
+  }
+
+  // Expand hull outward slightly for organic feel
+  function expandHull(hull, amount=0.012){
+    const cx = hull.reduce((s,p)=>s+p[0],0)/hull.length;
+    const cy = hull.reduce((s,p)=>s+p[1],0)/hull.length;
+    return hull.map(p=>{
+      const dx=p[0]-cx, dy=p[1]-cy;
+      const len=Math.sqrt(dx*dx+dy*dy)||1;
+      return [p[0]+dx/len*amount, p[1]+dy/len*amount];
+    });
+  }
+
+  // Add intermediate points between hull vertices to allow smoothing
+  function smoothHull(hull){
+    const out=[];
+    for(let i=0;i<hull.length;i++){
+      const a=hull[i], b=hull[(i+1)%hull.length];
+      out.push(a);
+      out.push([(a[0]+b[0])/2,(a[1]+b[1])/2]);
+    }
+    return out;
+  }
+
+  const hull = convexHull(allPts);
+  const expanded = expandHull(hull, 0.012);
+  const smoothed = smoothHull(expanded);
+
+  catchmentLayer = L.polygon(smoothed, {
+    color: hc,
+    fillColor: hc,
+    fillOpacity: 0.10,
+    weight: 2,
+    dashArray: null,
+    smoothFactor: 2.5
+  }).addTo(map);
+}
+
+function showDetail(name){
+  const hub = NAAT_DATA.find(h=>h.name===name);
+  if(!hub) return;
+  const pos=getPosVal(), wd=getWD(), thr=getThr(), ovPct=getOv();
+
+  document.getElementById('detailTitle').textContent = `${hub.name} — ${hub.total_feeders} feeder sites`;
+  // Render scenario tabs
+  const s1 = renderScenario1(name);
+  const s2 = renderScenario2(name);
+
+  let rows = '';
+  const sorted = [...hub.feeders].map(f=>{
+    const r = calcSite(f.population, f.presumptive, pos, ovPct);
+    const s = suggestDev(r.monthlyQP, wd);
+    const saved = Math.round(r.monthlyNAAT*(1-pos/100));
+    return {...f, ...r, sug:s, saved};
+  }).sort((a,b)=>b.monthlyNAAT-a.monthlyNAAT);
+
+  sorted.forEach(f=>{
+    const utilPct = Math.min(200, Math.round(f.monthlyQP/f.sug.cap*100));
+    const bc = utilPct>100?'#f85149':utilPct>80?'#d29922':'#3fb950';
+    const vulnCount = Math.round(f.population * CATS.filter(c=>selectedCats.has(c.id)&&c.grp!=='Symptomatic').reduce((s,c)=>s+c.popFrac,0));
+    rows += `<tr>
+      <td style="color:#ccc;font-weight:500">${f.name}</td>
+      <td>${f.population.toLocaleString()}</td>
+      <td>${vulnCount.toLocaleString()}</td>
+      <td>${f.presumptive.toLocaleString()}</td>
+      <td style="color:${f.monthlyNAAT>thr*0.15?'#f85149':'#3fb950'};font-weight:600">${f.monthlyNAAT.toLocaleString()}</td>
+      <td>${f.monthlyQP.toLocaleString()}</td>
+      <td>
+        <div style="font-size:10px;color:${bc}">${utilPct}%</div>
+        <div class="bar-wrap" style="min-width:50px"><div class="bar-fill" style="width:${Math.min(utilPct,100)}%;background:${bc}"></div></div>
+      </td>
+      <td>${f.has_uniamp?'<span class="badge bu">Uniamp ✓</span>':'<span style="color:#555;font-size:10px">None</span>'}</td>
+      <td><span class="badge ${f.has_uniamp?'bu':f.sug.badge}">${f.has_uniamp?'Deployed':f.sug.dev}</span></td>
+      <td style="color:#3fb950;font-weight:600;font-size:11px">${f.saved} NAAT tests/mo</td>
+      <td style="color:#58a6ff;font-size:11px">${Math.round(f.saved*0.92*2.5).toLocaleString()} hrs/mo</td>
+      <td style="font-size:10px">
+        <span style="color:#9FE1CB">Asymp/vulnerable: ${f.has_uniamp?'tested locally (1-2 hrs), no travel':'2-3 day NAAT wait → same-day with device'}</span><br>
+        <span style="color:#f0c040">Paed+EPTB: ${f.has_uniamp?'NAAT hub freed, faster slot':'competing with all presumptive for slot'}</span>
+      </td>
+    </tr>`;
+  });
+
+  document.getElementById('detailContent').innerHTML = `
+    <div style="display:flex;gap:0;margin-bottom:10px;border-bottom:1px solid #30363d">
+      <button onclick="showTab('feeders')" id="tab_feeders" style="padding:6px 14px;border:none;border-bottom:2px solid #1f6feb;background:none;color:#58a6ff;cursor:pointer;font-size:12px">Feeder Sites</button>
+      <button onclick="showTab('s1')" id="tab_s1" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 1 — NAAT Load</button>
+      <button onclick="showTab('s2')" id="tab_s2" style="padding:6px 14px;border:none;border-bottom:2px solid transparent;background:none;color:#8b949e;cursor:pointer;font-size:12px">Scenario 2 — DR-TB Cost</button>
+    </div>
+    <div id="tab_feeders_content">
+    <table><thead><tr>
+      <th>Site</th><th>Population</th><th>Vulnerable pop</th><th>Presumptive/yr</th>
+      <th>NAAT/month</th><th>Device tests/mo</th><th>Utilization</th>
+      <th>Current device</th><th>Recommendation</th><th>NAAT tests saved/mo</th><th>Travel hrs saved/mo</th><th>Wait time impact</th>
+    </tr></thead><tbody>${rows}</tbody></table>
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-size:11px;color:#58a6ff">Show vulnerability category breakdown (aggregate for ${hub.name})</summary>
+      <table style="margin-top:6px"><thead><tr><th>Category</th><th>Pathway</th><th>Est. count</th><th>To test</th></tr></thead>
+      <tbody>${vulnBreakdown(hub.total_pop)}</tbody></table>
+    </details>
+  `;
+
+  document.getElementById('detailPanel').style.display = 'block';
+}
+
+function render(){
+  const name = document.getElementById('naatSel').value;
+  const hub = NAAT_DATA.find(h=>h.name===name);
+  if(!hub) return;
+  const pos=getPosVal(), wd=getWD(), thr=getThr(), ovPct=getOv();
+
+  let aggNAAT=0, aggQP=0;
+  hub.feeders.forEach(f=>{
+    const r=calcSite(f.population,f.presumptive,pos,ovPct);
+    aggNAAT+=r.monthlyNAAT; aggQP+=r.monthlyQP;
+  });
+  const choked = aggNAAT > thr;
+
+  document.getElementById('mets').innerHTML = `
+    <div class="met"><div class="mv white">${hub.total_feeders}</div><div class="ml">Feeders</div></div>
+    <div class="met"><div class="mv blue">${hub.uniamp_count}</div><div class="ml">Have device</div></div>
+    <div class="met"><div class="mv amber">${hub.no_uniamp_count}</div><div class="ml">Need device</div></div>
+    <div class="met"><div class="mv ${choked?'red':'green'}">${aggNAAT.toLocaleString()}</div><div class="ml">NAAT/month</div></div>
+    <div class="met"><div class="mv white">${(hub.total_pop/1000).toFixed(0)}k</div><div class="ml">Total pop</div></div>
+    <div class="met"><div class="mv ${choked?'red':'green'}">${choked?'CHOKED':'OK'}</div><div class="ml">Hub status</div></div>
+  `;
+
+  document.getElementById('alerts').innerHTML = choked
+    ? `<div class="alert alert-r">CHOKED — ${aggNAAT.toLocaleString()}/month &gt; threshold ${thr}</div>`
+    : `<div class="alert alert-g">Within capacity — ${aggNAAT.toLocaleString()}/month</div>`;
+  const totalSaved = Math.round(aggNAAT*(1-pos/100));
+  const travelHrsSaved = Math.round(totalSaved*0.92*2.5);
+  document.getElementById('alerts').innerHTML += `<div class="alert alert-a">⚡ ~${Math.round(hub.total_pop*0.005/12)} paediatric + ~${Math.round(hub.total_pop*0.002/12)} EPTB/month → NAAT direct, reserve capacity</div>`;
+  document.getElementById('alerts').innerHTML += `<div class="alert alert-g" style="margin-top:4px">
+    If all devices deployed: <b>${totalSaved.toLocaleString()} NAAT tests/month</b> freed &nbsp;|&nbsp; <b>${travelHrsSaved.toLocaleString()} patient travel hrs/month</b> saved<br>
+    <span style="font-size:10px;opacity:0.9">Asymptomatic/vulnerable: same-day result at peripheral site, no journey to NAAT hub<br>
+    Paediatric + EPTB: NAAT hub freed up → faster slot → treatment starts 1-2 days earlier</span>
+  </div>`;
+
+  // Prediction
+  const needDev = hub.feeders.map(f=>{
+    const r=calcSite(f.population,f.presumptive,pos,ovPct);
+    const s=suggestDev(r.monthlyQP,wd);
+    return {...f,...r,sug:s,saved:Math.round(r.monthlyNAAT*(1-pos/100))};
+  }).filter(f=>!f.has_uniamp&&f.monthlyNAAT>5).sort((a,b)=>b.monthlyNAAT-a.monthlyNAAT);
+
+  let ph = `<div class="card" style="padding:8px">
+    <p style="font-size:12px;font-weight:600;color:#ccc;margin-bottom:6px">Device recommendations</p>`;
+  if(!needDev.length){
+    ph+=`<div class="alert alert-g" style="margin:0">All high-volume sites have devices.</div>`;
+  } else {
+    needDev.slice(0,5).forEach((f,i)=>{
+      ph+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #21262d">
+        <div>
+          <span style="color:#d29922;font-weight:700;margin-right:6px">#${i+1}</span>
+          <span style="color:#ccc;font-size:11px">${f.name}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <span style="color:#f85149;font-size:11px">${f.monthlyNAAT}/mo</span>
+          <span class="badge ${f.sug.badge}">${f.sug.dev}</span>
+          <span style="color:#3fb950;font-size:10px">saves ${f.saved} NAAT tests/mo</span><br><span style="color:#58a6ff;font-size:10px">~${Math.round(f.saved*0.92*2.5)} patient travel hrs/mo saved</span>
+        </div>
+      </div>`;
+    });
+  }
+  ph+=`</div>`;
+  document.getElementById('predBox').innerHTML = ph;
+
+  // Redraw markers
+  drawAllMarkers();
+  if(currentHub===name){ highlightCatchment(name); showDetail(name); }
+}
+
+// Dropdown
+function buildDD(){
+  const menu = document.getElementById('ddMenu');
+  const grps=['Symptomatic','Clinical-NAAT','Existing','New'];
+  grps.forEach(grp=>{
+    const d=document.createElement('div');
+    d.className='dd-grp';
+    d.textContent=grp==='Clinical-NAAT'?'NAAT direct (⚡ fast-track)':grp;
+    menu.appendChild(d);
+    CATS.filter(c=>c.grp===grp).forEach(cat=>{
+      const l=document.createElement('label');
+      l.className='dd-item';
+      l.innerHTML=`<input type="checkbox" id="chk_${cat.id}" checked onchange="onCC('${cat.id}',this.checked)"> ${cat.name}`;
+      menu.appendChild(l);
+    });
+  });
+}
+function toggleDD(e){e.stopPropagation();document.getElementById('ddMenu').classList.toggle('open');}
+document.addEventListener('click',()=>document.getElementById('ddMenu').classList.remove('open'));
+function onCC(id,chk){chk?selectedCats.add(id):selectedCats.delete(id);updateDDLbl();render();}
+function selectAll(){CATS.forEach(c=>{selectedCats.add(c.id);document.getElementById('chk_'+c.id).checked=true;});updateDDLbl();render();}
+function selectNone(){selectedCats.clear();CATS.forEach(c=>{document.getElementById('chk_'+c.id).checked=false;});updateDDLbl();render();}
+function selectGrp(g){
+  selectedCats.clear();
+  CATS.forEach(c=>{
+    const m=g==='Clinical-NAAT'?c.grp==='Clinical-NAAT':c.pathway==='qp';
+    document.getElementById('chk_'+c.id).checked=m;
+    if(m)selectedCats.add(c.id);
+  });
+  updateDDLbl();render();
+}
+function updateDDLbl(){
+  const n=selectedCats.size,t=CATS.length;
+  document.getElementById('ddBtn').textContent=n===t?'All categories selected':n===0?'No categories':n+' of '+t+' selected';
+}
+function setPct(p,btn){vulnPct=p;document.querySelectorAll('.pct-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render();}
+
+// Build NAAT select
+function buildSel(){
+  const sel=document.getElementById('naatSel');
+  NAAT_DATA.forEach(h=>{
+    const o=document.createElement('option');
+    o.value=h.name;
+    o.textContent=`${h.name} (${h.total_feeders} feeders)`;
+    sel.appendChild(o);
+  });
+}
+
+function initAll(){
+  buildDD();
+  buildSel();
+  initMap();
+  currentHub = NAAT_DATA[0].name;
+  document.getElementById('naatSel').value = currentHub;
+  render();
+  highlightCatchment(currentHub);
+  showDetail(currentHub);
+}
+// Run immediately and also on load
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',initAll);
+} else {
+  setTimeout(initAll,100);
+}
+
+
+// ─── ASSUMED/IMPUTED DATA (clearly labelled) ─────────────────────────────────
+// All values below are assumed from published NTEP data and literature.
+// Replace with actual State TB Cell data when available.
+
+const NAAT_CAPACITY = {
+  // modules × 96 tests/module/month (TrueNAAT optimal throughput)
+  "Eranavoor UPHC":       {modules:2, optimal:192, current:140, techs:2},
+  "Puzhal UPHC":          {modules:3, optimal:288, current:210, techs:2},
+  "CDH":                  {modules:4, optimal:384, current:310, techs:3},
+  "Kodungaiyur UPHC":     {modules:2, optimal:192, current:120, techs:1},
+  "Basin Briadge UPHC":   {modules:2, optimal:192, current:165, techs:2},
+  "GPH Periyar Nagar":    {modules:3, optimal:288, current:220, techs:2},
+  "Padi Round Building":  {modules:2, optimal:192, current:155, techs:2},
+  "ITM":                  {modules:6, optimal:576, current:480, techs:4},
+  "MMDA UPHC":            {modules:2, optimal:192, current:130, techs:1},
+  "Beemanampet UPHC":     {modules:2, optimal:192, current:100, techs:1},
+  "Koyembedu UPHC":       {modules:2, optimal:192, current:145, techs:2},
+  "Kodambakkam UPHC":     {modules:2, optimal:192, current:135, techs:1},
+  "ESIC Hospital Kk Nagar":{modules:3, optimal:288, current:200, techs:2},
+  "Chinnaporur UPHC":     {modules:2, optimal:192, current:110, techs:1},
+  "Nanganallur UPHC":     {modules:2, optimal:192, current:150, techs:2},
+  "Adambakkam UPHC":      {modules:3, optimal:288, current:240, techs:2},
+  "Jaladiyanpettai UPHC": {modules:2, optimal:192, current:160, techs:2},
+  "Palavakkam UPHC":      {modules:2, optimal:192, current:130, techs:1},
+};
+
+// Assumed costs (Rs) — from published NTEP procurement and literature
+const COSTS = {
+  uniamp_machine:   50000,
+  uniamp_cart:      450,
+  qp_machine:       450000,
+  qp_cart:          1200,
+  cbnaat_machine:   1500000,
+  cbnaat_cart:      1800,
+  tech_time_uniamp: 15,   // minutes per test
+  tech_time_qp:     20,   // minutes per test
+  tech_time_naat:   25,   // minutes per test
+  tech_hourly_wage: 150,  // Rs per hour (Group C govt staff)
+  patient_travel_cost: 80, // Rs per trip (bus/auto, Chennai avg)
+  patient_wage_loss:  400, // Rs per day (informal sector avg)
+};
+
+// RIF resistance rate by setting (assumed from TN state data ~10% of PTB)
+const RIF_RESISTANCE = {
+  peripheral_uphc: 0.08,   // 8% — community OPD, lower risk
+  tertiary:        0.18,   // 18% — ITM/MMC, higher risk cohort
+  default:         0.10,   // 10% — state average
+};
+
+// TB type split (assumed from NTEP TN annual report proportions)
+const TB_SPLIT = {
+  pulmonary:    0.72,
+  eptb:         0.18,
+  pediatric:    0.10,
+  private_notif: 0.15, // private sector as % of total notifications
+};
+
+function renderScenario1(name){
+  const hub = NAAT_DATA.find(h=>h.name===name);
+  if(!hub) return;
+  const cap = NAAT_CAPACITY[name] || {modules:2,optimal:192,current:150,techs:2};
+  const pos = getPosVal(), wd=getWD(), thr=getThr(), ovPct=getOv();
+
+  let aggNAAT=0, aggQP=0;
+  hub.feeders.forEach(f=>{
+    const r=calcSite(f.population,f.presumptive,pos,ovPct);
+    aggNAAT+=r.monthlyNAAT; aggQP+=r.monthlyQP;
+  });
+
+  const demand        = aggNAAT;
+  const gap           = Math.max(0, demand - cap.current);
+  const utilPct       = Math.round(cap.current/cap.optimal*100);
+  const demandPct     = Math.round(demand/cap.optimal*100);
+  const choked        = demand > cap.optimal;
+  const popCoverage   = Math.round(hub.total_pop / 1000);
+  const withDevicePop = hub.feeders.filter(f=>f.has_uniamp).reduce((s,f)=>s+f.population,0);
+  const noDevicePop   = hub.total_pop - withDevicePop;
+  const coverageImprove = Math.round(noDevicePop / hub.total_pop * 100);
+
+  // Cost benefit
+  const annualDemand  = demand * 12;
+  const costAllNAAT   = annualDemand * COSTS.cbnaat_cart;
+  const uniampSites   = hub.feeders.filter(f=>!f.has_uniamp&&calcSite(f.population,f.presumptive,pos,ovPct).monthlyNAAT>5).length;
+  const qpTests       = aggQP * 12;
+  const naatAfter     = Math.round(aggQP * (pos/100)) * 12 + (demand - aggQP) * 12;
+  const costWithQP    = (qpTests * COSTS.qp_cart) + (naatAfter * COSTS.cbnaat_cart) + (uniampSites * COSTS.qp_machine);
+  const costSaving    = costAllNAAT - costWithQP;
+
+  // TAT
+  const tatBefore = 2.5; // days avg (travel + queue + result)
+  const tatAfter  = 0.1; // days (same day, 1-2 hrs)
+
+  // Tech workload
+  const techMinBefore = demand * COSTS.tech_time_naat;
+  const techMinAfter  = aggQP * COSTS.tech_time_qp + (demand-aggQP)*COSTS.tech_time_naat;
+  const techHrsSaved  = Math.round((techMinBefore - techMinAfter) / 60);
+
+  // Notifications split
+  const annualNotif   = Math.round(hub.total_presumptive * (pos/100));
+  const ptb   = Math.round(annualNotif * TB_SPLIT.pulmonary);
+  const eptb  = Math.round(annualNotif * TB_SPLIT.eptb);
+  const peds  = Math.round(annualNotif * TB_SPLIT.pediatric);
+  const pvt   = Math.round(annualNotif * TB_SPLIT.private_notif);
+
+  const barColor = demandPct>100?'#f85149':demandPct>80?'#d29922':'#3fb950';
+  const utilColor = utilPct>85?'#d29922':utilPct>50?'#3fb950':'#58a6ff';
+
+  return `
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+    <div class="met"><div class="mv white">${cap.modules}</div><div class="ml">NAAT modules <span class="tip">(assumed)</span></div></div>
+    <div class="met"><div class="mv amber">${cap.optimal}</div><div class="ml">Optimal capacity/month</div></div>
+    <div class="met"><div class="mv ${utilColor}">${cap.current}</div><div class="ml">Current utilization/month</div></div>
+    <div class="met"><div class="mv ${demandPct>100?'red':'green'}">${demand.toLocaleString()}</div><div class="ml">Demand (vulnerability-based)/month</div></div>
+    <div class="met"><div class="mv ${gap>0?'red':'green'}">${gap.toLocaleString()}</div><div class="ml">Gap (demand − current)/month</div></div>
+    <div class="met"><div class="mv white">${cap.techs}</div><div class="ml">Lab technicians <span class="tip">(assumed)</span></div></div>
+  </div>
+
+  <div style="margin-bottom:8px">
+    <div style="font-size:11px;color:#8b949e;margin-bottom:3px">NAAT capacity utilization vs demand</div>
+    <div style="display:flex;gap:6px;align-items:center;margin-bottom:3px">
+      <span style="font-size:10px;color:#8b949e;width:90px">Current use</span>
+      <div class="bar-wrap" style="flex:1"><div class="bar-fill" style="width:${Math.min(utilPct,100)}%;background:${utilColor}"></div></div>
+      <span style="font-size:10px;color:${utilColor}">${utilPct}%</span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <span style="font-size:10px;color:#8b949e;width:90px">Demand</span>
+      <div class="bar-wrap" style="flex:1"><div class="bar-fill" style="width:${Math.min(demandPct,100)}%;background:${barColor}"></div></div>
+      <span style="font-size:10px;color:${barColor}">${demandPct}% of capacity</span>
+    </div>
+  </div>
+
+  <table style="margin-bottom:8px"><thead><tr>
+    <th>Metric</th><th>Before QP</th><th>After QP deployment</th><th>Improvement</th>
+  </tr></thead><tbody>
+    <tr><td style="color:#ccc">Monthly NAAT tests at hub</td>
+      <td style="color:#f85149">${demand.toLocaleString()}</td>
+      <td style="color:#3fb950">${Math.round(demand*(pos/100)).toLocaleString()}</td>
+      <td style="color:#3fb950">↓ ${Math.round((1-pos/100)*100)}% reduction</td></tr>
+    <tr><td style="color:#ccc">Avg TAT for symptomatic patient</td>
+      <td style="color:#f85149">${tatBefore} days (travel+queue+result)</td>
+      <td style="color:#3fb950">Same day (1-2 hrs at peripheral site)</td>
+      <td style="color:#3fb950">↓ ${tatBefore-tatAfter} days faster</td></tr>
+    <tr><td style="color:#ccc">Population with same-day access</td>
+      <td style="color:#f85149">${Math.round(withDevicePop/1000)}k (${Math.round(withDevicePop/hub.total_pop*100)}%)</td>
+      <td style="color:#3fb950">${Math.round(hub.total_pop/1000)}k (100%)</td>
+      <td style="color:#3fb950">↑ ${coverageImprove}% more population covered</td></tr>
+    <tr><td style="color:#ccc">Tech workload (NAAT mins/month)</td>
+      <td style="color:#f85149">${(demand*COSTS.tech_time_naat).toLocaleString()} mins</td>
+      <td style="color:#3fb950">${Math.round(techMinAfter).toLocaleString()} mins</td>
+      <td style="color:#3fb950">↓ ${techHrsSaved} tech hrs/month saved</td></tr>
+    <tr><td style="color:#ccc">Annual diagnostic cost</td>
+      <td style="color:#f85149">Rs ${Math.round(costAllNAAT/100000).toLocaleString()}L</td>
+      <td style="color:#3fb950">Rs ${Math.round(costWithQP/100000).toLocaleString()}L</td>
+      <td style="color:#3fb950">Save Rs ${Math.round(costSaving/100000).toLocaleString()}L/year</td></tr>
+  </tbody></table>
+
+  <div style="margin-bottom:8px">
+    <p style="font-size:11px;font-weight:600;color:#8b949e;margin-bottom:4px">Estimated TB notifications split (assumed proportions)</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
+      <div class="met"><div class="mv white">${ptb}</div><div class="ml">Pulmonary TB/yr</div></div>
+      <div class="met"><div class="mv amber">${eptb}</div><div class="ml">EPTB/yr ⚡ NAAT direct</div></div>
+      <div class="met"><div class="mv blue">${peds}</div><div class="ml">Paediatric/yr ⚡ NAAT direct</div></div>
+      <div class="met"><div class="mv white">${pvt}</div><div class="ml">Private sector/yr <span class="tip">(assumed)</span></div></div>
+    </div>
+  </div>
+  <p class="tip">All assumed values marked. Replace with actual NAAT module count, utilization registers, and HR data from State TB Cell.</p>`;
+}
+
+function renderScenario2(name){
+  const hub = NAAT_DATA.find(h=>h.name===name);
+  if(!hub) return;
+  const pos = getPosVal(), wd=getWD(), ovPct=getOv();
+  const isITM = name.includes('ITM') || name.includes('Thoracic') || name.includes('MMC');
+  const rifRate = isITM ? RIF_RESISTANCE.tertiary : RIF_RESISTANCE.peripheral_uphc;
+
+  let aggNAAT=0, aggQP=0;
+  hub.feeders.forEach(f=>{
+    const r=calcSite(f.population,f.presumptive,pos,ovPct);
+    aggNAAT+=r.monthlyNAAT; aggQP+=r.monthlyQP;
+  });
+
+  const annualPresumptive = hub.total_presumptive;
+  const annualPositives   = Math.round(annualPresumptive * pos/100);
+  const annualRIF         = Math.round(annualPositives * rifRate);
+  const annualDS          = annualPositives - annualRIF;
+
+  // Scenario A: Upfront NAAT for all presumptive (current approach)
+  const costA_tests  = annualPresumptive * COSTS.cbnaat_cart;
+  const techA        = annualPresumptive * COSTS.tech_time_naat / 60; // hrs
+  const tatA         = 2.5; // days avg
+
+  // Scenario B: Stratified — QP first, NAAT only for positives (DR-TB detection)
+  const qpTests_B    = annualPresumptive;
+  const naatTests_B  = annualPositives; // only positives go to NAAT for DST
+  const costB_tests  = (qpTests_B * COSTS.qp_cart) + (naatTests_B * COSTS.cbnaat_cart);
+  const costB_machine= hub.feeders.filter(f=>!f.has_uniamp).length * COSTS.qp_machine;
+  const costB_total  = costB_tests + costB_machine;
+  const techB        = (qpTests_B * COSTS.tech_time_qp + naatTests_B * COSTS.tech_time_naat) / 60;
+  const tatB_neg     = 0.1; // days — same day negative result
+  const tatB_pos     = 1.5; // days — QP positive + NAAT next day
+
+  // Missed DR-TB in stratified approach
+  // QP detects MTB — all positives go to NAAT for RIF. No DR-TB missed.
+  const missedDRTB = 0;
+
+  const saving = costA_tests - costB_total;
+  const techSaved = Math.round(techA - techB);
+
+  return `
+  <div class="alert alert-a" style="margin-bottom:8px">
+    <b>Assumed RIF resistance rate: ${Math.round(rifRate*100)}%</b> ${isITM?'(tertiary care cohort — higher risk)':'(peripheral UPHC cohort — community prevalence)'}
+    <br><span class="tip">Source: Tamil Nadu State TB Report 2023 assumed values. Replace with actual site data.</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
+    <div class="met"><div class="mv white">${annualPresumptive.toLocaleString()}</div><div class="ml">Annual presumptive</div></div>
+    <div class="met"><div class="mv amber">${annualPositives.toLocaleString()}</div><div class="ml">MTB positive/yr (${Math.round(pos)}%)</div></div>
+    <div class="met"><div class="mv red">${annualRIF.toLocaleString()}</div><div class="ml">RIF resistant/yr (${Math.round(rifRate*100)}%)</div></div>
+    <div class="met"><div class="mv green">${annualDS.toLocaleString()}</div><div class="ml">Drug sensitive/yr</div></div>
+  </div>
+
+  <table style="margin-bottom:10px"><thead><tr>
+    <th>Parameter</th>
+    <th style="color:#f85149">Scenario A — Upfront NAAT (all presumptive)</th>
+    <th style="color:#3fb950">Scenario B — Stratified QP → NAAT (positives only)</th>
+    <th>Difference</th>
+  </tr></thead><tbody>
+    <tr><td style="color:#ccc">Tests performed/year</td>
+      <td>${annualPresumptive.toLocaleString()} NAAT tests</td>
+      <td>${annualPresumptive.toLocaleString()} QP + ${annualPositives.toLocaleString()} NAAT</td>
+      <td style="color:#3fb950">↓ ${(annualPresumptive-annualPositives).toLocaleString()} NAAT tests/yr</td></tr>
+    <tr><td style="color:#ccc">Annual test cost</td>
+      <td style="color:#f85149">Rs ${Math.round(costA_tests/100000).toLocaleString()}L</td>
+      <td style="color:#3fb950">Rs ${Math.round(costB_total/100000).toLocaleString()}L (incl. machines)</td>
+      <td style="color:#3fb950">Save Rs ${Math.round(saving/100000).toLocaleString()}L/yr</td></tr>
+    <tr><td style="color:#ccc">Cost per confirmed TB case</td>
+      <td style="color:#f85149">Rs ${Math.round(costA_tests/annualPositives).toLocaleString()}</td>
+      <td style="color:#3fb950">Rs ${Math.round(costB_total/annualPositives).toLocaleString()}</td>
+      <td style="color:#3fb950">Rs ${Math.round((costA_tests-costB_total)/annualPositives).toLocaleString()} cheaper/case</td></tr>
+    <tr><td style="color:#ccc">DR-TB cases detected</td>
+      <td style="color:#3fb950">${annualRIF.toLocaleString()} (all get RIF result upfront)</td>
+      <td style="color:#3fb950">${annualRIF.toLocaleString()} (QP+ → NAAT for DST — none missed)</td>
+      <td style="color:#3fb950">No DR-TB missed — stratified is safe</td></tr>
+    <tr><td style="color:#ccc">TAT — negative patient</td>
+      <td style="color:#f85149">${tatA} days (travel + queue + result)</td>
+      <td style="color:#3fb950">${tatB_neg} days (same-day at peripheral site)</td>
+      <td style="color:#3fb950">↓ ${(tatA-tatB_neg).toFixed(1)} days faster</td></tr>
+    <tr><td style="color:#ccc">TAT — positive → DST result</td>
+      <td style="color:#3fb950">${tatA} days (single visit, upfront NAAT)</td>
+      <td style="color:#amber">${tatB_pos} days (QP day 1, NAAT day 2)</td>
+      <td style="color:#f85149">+${(tatB_pos-tatA).toFixed(1)} day for positives — acceptable tradeoff</td></tr>
+    <tr><td style="color:#ccc">Technician time/year</td>
+      <td style="color:#f85149">${Math.round(techA).toLocaleString()} tech hrs</td>
+      <td style="color:#3fb950">${Math.round(techB).toLocaleString()} tech hrs</td>
+      <td style="color:#3fb950">↓ ${Math.abs(techSaved).toLocaleString()} tech hrs/yr saved</td></tr>
+    <tr><td style="color:#ccc">Paediatric + EPTB pathway</td>
+      <td colspan="2" style="color:#f0c040">⚡ Both scenarios: Paed + EPTB → NAAT direct. No QP pre-screening. Stratified approach frees NAAT capacity → faster slot for these priority cases.</td>
+      <td style="color:#3fb950">Faster access for priority groups</td></tr>
+  </tbody></table>
+
+  <div class="alert alert-g">
+    <b>Conclusion for ${name}:</b> Stratified QP-first approach saves Rs ${Math.round(saving/100000).toLocaleString()}L/year and ${Math.abs(techSaved).toLocaleString()} technician hours/year with no DR-TB cases missed. The only tradeoff is a 1-day additional wait for the ${Math.round(pos)}% who test positive on QP — clinically acceptable for low-risk peripheral settings. For tertiary/high-risk settings (ITM, MMC), upfront NAAT remains preferred.
+  </div>
+  <p class="tip" style="margin-top:6px">All cost and resistance figures are assumed. Replace RIF resistance rate and actual NAAT utilization data with figures from State TB Cell for accurate projections.</p>`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+id,name,district,tu,naat_hub,device_type,lat,lon,monthly_capacity,current_cases,presumptive_tests,population,has_uniamp
+F001,Thangal Uphc,Chennai,Thiruvetriyur,Eranavoor UPHC,Uniamp,13.1882,80.3089,260,28,844,55111,True
+F002,HWC Annai sivagami nagar (Div3),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.190783,80.29815,0,0,37,25000,False
+F003,HWC Ondikuppam Tnuhb ( Dhobikana) div-14,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.179851,80.304096,0,2,37,25000,False
+F004,HWC Pattithar Kovil Market (div 9),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.193694,80.317701,0,0,37,25000,False
+F005,HWC Ramasamy Nagar (div7),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.198365,80.300008,0,2,37,25000,False
+F006,HWC Srirangam Newtown (div5),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.184258,80.298294,0,2,37,25000,False
+F007,HWC Thalan kuppam(div1),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.178159,80.312561,0,2,37,25000,False
+F008,HWC Varadharaja Perumal Kovil Street (div13),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.172396,80.303365,0,0,37,25000,False
+F009,HWC West Mada Street (div 10),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.191097,80.313748,0,2,37,25000,False
+F010,kathivakkam UPHC,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.178213,80.315078,0,3,67,45000,False
+F011,kuppam UPHC,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.195883,80.297595,0,0,67,45000,False
+F012,Poongavanapuram UPHC,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.195775,80.318344,0,0,67,45000,False
+F013,Sathankadu UPHC,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.181808,80.302064,0,0,67,45000,False
+F014,SUGAM HOSPITAL,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.200316,80.307498,0,3,120,80000,False
+F015,THIRUVETRIYUR GH,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.174382,80.300301,0,1,52,35000,False
+F016,ADYAR UCHC,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.197025,80.315512,0,4,67,45000,False
+F017,ADYAR UPHC (BESANT NAGAR UPHC),Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.195814,80.319292,0,4,67,45000,False
+F018,HWC-171-KAMARAJAR SALAI,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.187687,80.326593,0,0,37,25000,False
+F019,MANDAVELI UPHC,Chennai,Thiruvetriyur,Eranavoor UPHC,None,13.182956,80.313961,0,4,67,45000,False
+F020,Lakshmipuram Uphc,Chennai,Madhavaram,Puzhal UPHC,Uniamp,13.1587,80.2311,260,56,2200,71110,True
+F021,Samy Nagar Uphc,Chennai,Madhavaram,Puzhal UPHC,Uniamp,13.1502,80.2198,260,57,1316,70420,True
+F022,ARUL NAGAR HWC 27,Chennai,Madhavaram,Puzhal UPHC,None,13.174382,80.208256,0,2,37,25000,False
+F023,ASHOKA STREET HWC 33,Chennai,Madhavaram,Puzhal UPHC,None,13.175351,80.207021,0,1,37,25000,False
+F024,Corporation EMS street HWC 24,Chennai,Madhavaram,Puzhal UPHC,None,13.170637,80.191075,0,0,37,25000,False
+F025,KANNABIRAN UPHC,Chennai,Madhavaram,Puzhal UPHC,None,13.156337,80.198382,0,1,67,45000,False
+F026,KANNAPPA STREET HWC 28,Chennai,Madhavaram,Puzhal UPHC,None,13.151894,80.196684,0,2,37,25000,False
+F027,KATHIRVEDU HWC 31,Chennai,Madhavaram,Puzhal UPHC,None,13.15253,80.198039,0,1,37,25000,False
+F028,Kosamani street HWC 23,Chennai,Madhavaram,Puzhal UPHC,None,13.168571,80.200645,0,1,37,25000,False
+F029,MADHAVARAM GH,Chennai,Madhavaram,Puzhal UPHC,None,13.160605,80.195985,0,2,52,35000,False
+F030,Pukraj nagar HWC 25,Chennai,Madhavaram,Puzhal UPHC,None,13.157509,80.2178,0,0,37,25000,False
+F031,PUTHAGARAM HWC 32,Chennai,Madhavaram,Puzhal UPHC,None,13.168941,80.207974,0,0,37,25000,False
+F032,Srinivasan perumal kovil street HWC26,Chennai,Madhavaram,Puzhal UPHC,None,13.154634,80.211574,0,1,37,25000,False
+F033,THANIKACHALAM NAGAR HWC 30,Chennai,Madhavaram,Puzhal UPHC,None,13.154402,80.201084,0,0,37,25000,False
+F034,Korrukupet Uphc,Chennai,Tondiarpet,CDH,Uniamp,13.1241,80.2934,260,11,1646,41642,True
+F035,Annai Sathya Nagar HWC,Chennai,Tondiarpet,CDH,None,13.142286,80.2958,0,2,37,25000,False
+F036,CHERIAN NAGAR UPHC,Chennai,Tondiarpet,CDH,None,13.129308,80.297138,0,3,67,45000,False
+F037,GOVT. PERIPHERAL HOSPITAL,Chennai,Tondiarpet,CDH,None,13.137886,80.29988,0,8,120,80000,False
+F038,JEEVA NAGAR SOUTH,Chennai,Tondiarpet,CDH,None,13.119471,80.277563,0,0,52,35000,False
+F039,KASIMA NAGAR UPHC,Chennai,Tondiarpet,CDH,None,13.122064,80.284632,0,3,67,45000,False
+F040,Poondithangammal Street HWC,Chennai,Tondiarpet,CDH,None,13.118929,80.304887,0,0,37,25000,False
+F041,Ranganathapuram Slum HWC,Chennai,Tondiarpet,CDH,None,13.138891,80.28604,0,2,37,25000,False
+F042,Singaravelan Nagar Pallam Paguthi HWC,Chennai,Tondiarpet,CDH,None,13.132263,80.288469,0,1,37,25000,False
+F043,V.O.C. Nagar UPHC,Chennai,Tondiarpet,CDH,None,13.140036,80.290366,0,5,67,45000,False
+F044,VOC Nagar Tsunami Quarters HWC,Chennai,Tondiarpet,CDH,None,13.120546,80.283999,0,2,37,25000,False
+F045,Sharma Nagar,Chennai,Kodungaiyur,Kodungaiyur UPHC,Uniamp,13.1367,80.2456,260,5,1484,58236,True
+F046,ECHS Polyclinic Chennai,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.140741,80.244082,0,1,52,35000,False
+F047,Indragandhi Nagar Hwc,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.141438,80.263135,0,1,37,25000,False
+F048,mdu_dist_cnn,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.135882,80.24278,0,0,52,35000,False
+F049,MKB nagar HWC,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.153826,80.251486,0,0,37,25000,False
+F050,Muthamizh nagar HWC,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.126627,80.237613,0,0,37,25000,False
+F051,Nethaji Nagar 6Th Street,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.127189,80.255023,0,3,52,35000,False
+F052,R K NAGAR NORTH HP,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.147662,80.248865,0,2,52,35000,False
+F053,Venkateshwaranagar Hwc,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.125806,80.247649,0,1,37,25000,False
+F054,VYASERPADI EAST,Chennai,Kodungaiyur,Kodungaiyur UPHC,None,13.153784,80.252073,0,2,52,35000,False
+F055,BRN Garden UPHC,Chennai,Basin Bridge,Basin Briadge UPHC,Uniamp,13.1089,80.2812,260,18,1681,49394,True
+F056,Amman Koil South,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.118732,80.286023,0,4,52,35000,False
+F057,BBD (HWC),Chennai,Basin Bridge,Basin Briadge UPHC,None,13.089944,80.281822,0,2,37,25000,False
+F058,BRN Garden,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.110051,80.276309,0,1,52,35000,False
+F059,BRN Garden (HWC),Chennai,Basin Bridge,Basin Briadge UPHC,None,13.097605,80.279429,0,2,37,25000,False
+F060,Chennai port authority hospital,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.092947,80.273243,0,3,120,80000,False
+F061,Harbour,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.103212,80.288814,0,1,52,35000,False
+F062,Harbour(HWC),Chennai,Basin Bridge,Basin Briadge UPHC,None,13.115876,80.268102,0,1,37,25000,False
+F063,Perumal Koil Garden,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.104618,80.26556,0,3,52,35000,False
+F064,PKG (HWC),Chennai,Basin Bridge,Basin Briadge UPHC,None,13.116979,80.286316,0,1,37,25000,False
+F065,Seven wells,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.098553,80.279368,0,4,52,35000,False
+F066,Seven wells (HWC),Chennai,Basin Bridge,Basin Briadge UPHC,None,13.107869,80.264785,0,0,37,25000,False
+F067,Harbour Uphc,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.112475,80.276381,0,5,67,45000,False
+F068,MUTHIYALPET UPHC,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.112959,80.276111,0,2,67,45000,False
+F069,UPHC,Chennai,Basin Bridge,Basin Briadge UPHC,None,13.089617,80.269925,0,0,67,45000,False
+F070,Kolathur Uphc,Chennai,Kolathur,GPH Periyar Nagar,Uniamp,13.1149,80.2237,260,8,1436,50522,True
+F071,Anjugam Nagar UPHC,Chennai,Kolathur,GPH Periyar Nagar,None,13.100484,80.236573,0,1,67,45000,False
+F072,GKM Colony UPHC (Nagammaiyar North),Chennai,Kolathur,GPH Periyar Nagar,None,13.126262,80.23365,0,4,67,45000,False
+F073,Makkaram Thottam UHWC,Chennai,Kolathur,GPH Periyar Nagar,None,13.109125,80.210438,0,2,37,25000,False
+F074,School Road UHWC,Chennai,Kolathur,GPH Periyar Nagar,None,13.12624,80.237108,0,1,37,25000,False
+F075,Veeramamunivar UPHC (mugapair east),Chennai,Padi Manjakuppam,Padi Round Building,Uniamp,13.0987,80.1923,260,18,1325,66000,True
+F076,ATHIPET uphc,Chennai,Padi Manjakuppam,Padi Round Building,None,13.08987,80.18298,0,2,67,45000,False
+F077,Health and Wellness centre - Athipet,Chennai,Padi Manjakuppam,Padi Round Building,None,13.089376,80.191218,0,0,37,25000,False
+F078,MOGAPPAIR UPHC - MOGAPPAIR WEST UPHC,Chennai,Padi Manjakuppam,Padi Round Building,None,13.110275,80.172252,0,1,67,45000,False
+F079,PADI MANJAKUPPAM UCHC,Chennai,Padi Manjakuppam,Padi Round Building,None,13.101558,80.184894,0,5,67,45000,False
+F080,Chetpet Uphc,Chennai,Aminjikarai,ITM,Uniamp,13.0726,80.2378,260,74,1085,40005,True
+F081,Aminjikarai East / AZADNAGAR UPHC,Chennai,Aminjikarai,ITM,None,13.066652,80.260673,0,3,67,45000,False
+F082,HEALTH AND WELLNESS CENTER AZAD NAGAR,Chennai,Aminjikarai,ITM,None,13.071394,80.240854,0,1,37,25000,False
+F083,Helth and wellness center Purasaivakkam,Chennai,Aminjikarai,ITM,None,13.074879,80.256398,0,1,52,35000,False
+F084,Institute of Child Health and Hospital,Chennai,Aminjikarai,ITM,None,13.064735,80.243851,0,2,120,80000,False
+F085,Intermediate Reference Laboratory (IRL),Chennai,Aminjikarai,ITM,None,13.088554,80.253996,0,4,52,35000,False
+F086,IOG,Chennai,Aminjikarai,ITM,None,13.071843,80.250027,0,3,52,35000,False
+F087,KILPAUK UPHC,Chennai,Aminjikarai,ITM,None,13.06233,80.241241,0,0,67,45000,False
+F088,mangalapuram Uphc,Chennai,Aminjikarai,ITM,None,13.068843,80.252149,0,0,67,45000,False
+F089,Purasawalkam UPHC,Chennai,Aminjikarai,ITM,None,13.065603,80.241107,0,0,67,45000,False
+F090,Shenoy Nagar EOC,Chennai,Aminjikarai,ITM,None,13.06083,80.253433,0,1,52,35000,False
+F091,Bharathipuram Uphc,Chennai,Mmda,MMDA UPHC,Uniamp,13.0834,80.2112,260,49,900,40350,True
+F092,Aminjikarai West / NADUVANKARAI HP,Chennai,Mmda,MMDA UPHC,None,13.074168,80.225563,0,3,52,35000,False
+F093,ANNA PERIPHERAL HOSPITAL,Chennai,Mmda,MMDA UPHC,None,13.093089,80.200526,0,9,120,80000,False
+F094,HEALTH AND WELLNESS  PANNEER SELVAM NAGAR,Chennai,Mmda,MMDA UPHC,None,13.07444,80.218469,0,1,37,25000,False
+F095,Panner Selvam nagar UPHC,Chennai,Mmda,MMDA UPHC,None,13.073727,80.202369,0,4,67,45000,False
+F096,Krishnampet Uphc,Chennai,Mylapore,Beemanampet UPHC,Uniamp,13.0456,80.2534,260,34,506,37184,True
+F097,Mylapore Health Wellness Centre 124,Chennai,Mylapore,Beemanampet UPHC,None,13.061965,80.247731,0,2,52,35000,False
+F098,MYLAPORE UPHC,Chennai,Mylapore,Beemanampet UPHC,None,13.04808,80.254139,0,5,67,45000,False
+F099,R.A.puram Health and wellness centre Div-126,Chennai,Mylapore,Beemanampet UPHC,None,13.058125,80.236312,0,1,37,25000,False
+F100,R.A.PURAM UPHC,Chennai,Mylapore,Beemanampet UPHC,None,13.036808,80.243532,0,0,67,45000,False
+F101,Santhome Health and wellness centre Div 125,Chennai,Mylapore,Beemanampet UPHC,None,13.046607,80.244611,0,1,37,25000,False
+F102,SANTHOME UPHC,Chennai,Mylapore,Beemanampet UPHC,None,13.055772,80.250801,0,3,67,45000,False
+F103,Virugambakkam Uphc,Chennai,Virugambakkam,Koyembedu UPHC,Uniamp,13.0567,80.1978,260,64,1354,55252,True
+F104,DASARATHAPURAM UPHC,Chennai,Virugambakkam,Koyembedu UPHC,None,13.072725,80.180953,0,1,67,45000,False
+F105,Health and Wellness Centre 128 virugambakkam,Chennai,Virugambakkam,Koyembedu UPHC,None,13.055279,80.188179,0,2,37,25000,False
+F106,K.K. Nagar UPHC,Chennai,Kodambakkam Tu,Kodambakkam UPHC,Uniamp,13.0389,80.2123,260,19,1141,52260,True
+F107,Health and Wellness Centre sivalingapuram 136,Chennai,Kodambakkam Tu,Kodambakkam UPHC,None,13.06295,80.21136,0,1,37,25000,False
+F108,K K NAGAR/ SALIGRAMMAM UPHC,Chennai,Kodambakkam Tu,Kodambakkam UPHC,None,13.042806,80.217358,0,1,67,45000,False
+F109,NESAPAKKAM UPHC,Chennai,Kodambakkam Tu,Kodambakkam UPHC,None,13.049756,80.212256,0,4,67,45000,False
+F110,VADAPALANI UCHC,Chennai,Kodambakkam Tu,Kodambakkam UPHC,None,13.044594,80.231598,0,4,67,45000,False
+F111,VADAPALANI WEST UPHC,Chennai,Kodambakkam Tu,Kodambakkam UPHC,None,13.050394,80.22974,0,0,67,45000,False
+F112,Ragava Colony UPHC ,Chennai,Saidapet West,ESIC Hospital Kk Nagar,Uniamp,13.03851,80.198618,260,106,1365,50460,True
+F113,ASHOK NAGAR UPHC,Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.051978,80.222181,0,2,67,45000,False
+F114,"Health and wellness center 138 Annai Sathya Nagar,",Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.05107,80.224891,0,0,37,25000,False
+F115,JAFFERKHANPET UPHC,Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.047461,80.202089,0,0,67,45000,False
+F116,KUMARAN NAGAR UPHC,Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.036569,80.203512,0,1,67,45000,False
+F117,"Peripheral Hospital, KK Nagar",Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.034031,80.198859,0,9,120,80000,False
+F118,Ragavan colony UPHC/SAIDAPET WEST UPHC,Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.033369,80.226659,0,0,67,45000,False
+F119,SAIDAPET UPHC/JONES ROAD,Chennai,Saidapet West,ESIC Hospital Kk Nagar,None,13.029956,80.220622,0,0,67,45000,False
+F120,Sakthinagar UPHC,Chennai,Porur,Chinnaporur UPHC,Uniamp,13.0378,80.1712,260,16,1158,87120,True
+F121,HWC -DIV 150-KARAMBAKKAM HWC,Chennai,Porur,Chinnaporur UPHC,None,13.03525,80.16789,0,2,37,25000,False
+F122,HWC -DIV 153- SAKTHI NAGAR HWC,Chennai,Porur,Chinnaporur UPHC,None,13.05032,80.185063,0,1,37,25000,False
+F123,HWC-DIV 154-RAMAPURAM HWC,Chennai,Porur,Chinnaporur UPHC,None,13.038273,80.176752,0,2,37,25000,False
+F124,mdu_dist_cnw,Chennai,Porur,Chinnaporur UPHC,None,13.026244,80.164101,0,1,52,35000,False
+F125,RAMAPURAM UPHC,Chennai,Porur,Chinnaporur UPHC,None,13.050661,80.172575,0,2,67,45000,False
+F126,SAKTHI NAGAR UPHC,Chennai,Porur,Chinnaporur UPHC,None,13.037866,80.177639,0,4,67,45000,False
+F127,Appavu Street UPHC,Chennai,Nanganallur,Nanganallur UPHC,Uniamp,12.9812,80.1923,260,91,1314,52062,True
+F128,ADAMBAKKAM UPHC,Chennai,Nanganallur,Nanganallur UPHC,None,12.961215,80.184025,0,2,67,45000,False
+F129,CONTONMENT HOSPITAL,Chennai,Nanganallur,Nanganallur UPHC,None,12.974586,80.192082,0,6,120,80000,False
+F130,HWC-DIV 156-MADHANANDHAPURAM,Chennai,Nanganallur,Nanganallur UPHC,None,12.964223,80.195323,0,2,37,25000,False
+F131,HWC-DIV 157-MANAPAKKAM,Chennai,Nanganallur,Nanganallur UPHC,None,12.961903,80.172075,0,2,37,25000,False
+F132,HWC-DIV 158-NANDAMBAKKAM,Chennai,Nanganallur,Nanganallur UPHC,None,12.977351,80.186756,0,1,37,25000,False
+F133,HWC-DIV 162-ALANDUR,Chennai,Nanganallur,Nanganallur UPHC,None,12.966556,80.170097,0,1,37,25000,False
+F134,MILITARY HOSPITAL CHENNAI,Chennai,Nanganallur,Nanganallur UPHC,None,12.986209,80.173886,0,8,120,80000,False
+F135,MUGALIVAKKAM UPHC,Chennai,Nanganallur,Nanganallur UPHC,None,12.977336,80.185081,0,3,67,45000,False
+F136,PALAVANTHANGAL UPHC,Chennai,Nanganallur,Nanganallur UPHC,None,12.972077,80.18401,0,0,67,45000,False
+F137,Sasthri Nagar UPHC,Chennai,Velachery,Adambakkam UPHC,Uniamp,12.9934,80.2134,260,56,1740,57745,True
+F138,Taramani UPHC ,Chennai,Velachery,Adambakkam UPHC,Uniamp,12.991883,80.224941,260,1,1762,54051,True
+F139,HWC-DIV 177-Orandiamman kovil street,Chennai,Velachery,Adambakkam UPHC,None,12.982328,80.218386,0,0,37,25000,False
+F140,HWC-DIV 178-Bharathi street- Taramani,Chennai,Velachery,Adambakkam UPHC,None,12.983361,80.208774,0,2,37,25000,False
+F141,HWC-DIV-176-Krishnaraja  4th street,Chennai,Velachery,Adambakkam UPHC,None,12.996351,80.2059,0,2,37,25000,False
+F142,mdu_dist_cns,Chennai,Velachery,Adambakkam UPHC,None,12.985685,80.219456,0,0,52,35000,False
+F143,Old Siddha Clinic/MADUVANKARAI UPHC,Chennai,Velachery,Adambakkam UPHC,None,12.978376,80.210649,0,1,67,45000,False
+F144,SASTRI NAGAR UPHC,Chennai,Velachery,Adambakkam UPHC,None,13.006154,80.226783,0,0,67,45000,False
+F145,SEVA NAGAR UPHC (VELACHERY UPHC),Chennai,Velachery,Adambakkam UPHC,None,12.978398,80.203295,0,0,67,45000,False
+F146,Sri Ramakrishna Vivekananda/THARAMANI UPHC,Chennai,Velachery,Adambakkam UPHC,None,12.984156,80.224898,0,2,67,45000,False
+F147,Puzhithivakkam UPHC,Chennai,Puzhithivakkam,Jaladiyanpettai UPHC,Uniamp,12.9245,80.1978,260,27,1512,65214,True
+F148,Neelangkarai UPHC,Chennai,Kannagi Nagar,Palavakkam UPHC,Uniamp,12.9523,80.2423,260,62,1773,70248,True
+F149,HWC-195- EZHIL NAGAR,Chennai,Kannagi Nagar,Palavakkam UPHC,None,12.972326,80.267878,0,1,37,25000,False
+F150,INJAMBAKKAM UCHC,Chennai,Kannagi Nagar,Palavakkam UPHC,None,12.956986,80.246232,0,3,67,45000,False
+F151,Kabaleeswarar Nagar(Neelangarai),Chennai,Kannagi Nagar,Palavakkam UPHC,None,12.970912,80.262606,0,1,52,35000,False
+F152,KANNGI NAGAR UPHC,Chennai,Kannagi Nagar,Palavakkam UPHC,None,12.96425,80.271117,0,0,67,45000,False
+F153,Thoraipakkam,Chennai,Kannagi Nagar,Palavakkam UPHC,None,12.965519,80.241735,0,0,52,35000,False

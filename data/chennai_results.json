@@ -1,0 +1,1563 @@
+{
+  "generated_at": "2026-06-04 14:36:57.812454",
+  "city": "Chennai",
+  "alerts": [
+    {
+      "facility_id": "F001",
+      "facility_name": "Thangal Uphc",
+      "tu": "Thiruvetriyur",
+      "naat_hub": "Eranavoor UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 844,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F020",
+      "facility_name": "Lakshmipuram Uphc",
+      "tu": "Madhavaram",
+      "naat_hub": "Puzhal UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 2200,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F021",
+      "facility_name": "Samy Nagar Uphc",
+      "tu": "Madhavaram",
+      "naat_hub": "Puzhal UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1316,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F034",
+      "facility_name": "Korrukupet Uphc",
+      "tu": "Tondiarpet",
+      "naat_hub": "CDH",
+      "cartridges_left": 0,
+      "presumptive_tests": 1646,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F045",
+      "facility_name": "Sharma Nagar",
+      "tu": "Kodungaiyur",
+      "naat_hub": "Kodungaiyur UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1484,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F055",
+      "facility_name": "BRN Garden UPHC",
+      "tu": "Basin Bridge",
+      "naat_hub": "Basin Briadge UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1681,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F070",
+      "facility_name": "Kolathur Uphc",
+      "tu": "Kolathur",
+      "naat_hub": "GPH Periyar Nagar",
+      "cartridges_left": 0,
+      "presumptive_tests": 1436,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F075",
+      "facility_name": "Veeramamunivar UPHC (mugapair east)",
+      "tu": "Padi Manjakuppam",
+      "naat_hub": "Padi Round Building",
+      "cartridges_left": 0,
+      "presumptive_tests": 1325,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F080",
+      "facility_name": "Chetpet Uphc",
+      "tu": "Aminjikarai",
+      "naat_hub": "ITM",
+      "cartridges_left": 0,
+      "presumptive_tests": 1085,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F091",
+      "facility_name": "Bharathipuram Uphc",
+      "tu": "Mmda",
+      "naat_hub": "MMDA UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 900,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F096",
+      "facility_name": "Krishnampet Uphc",
+      "tu": "Mylapore",
+      "naat_hub": "Beemanampet UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 506,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F103",
+      "facility_name": "Virugambakkam Uphc",
+      "tu": "Virugambakkam",
+      "naat_hub": "Koyembedu UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1354,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F106",
+      "facility_name": "K.K. Nagar UPHC",
+      "tu": "Kodambakkam Tu",
+      "naat_hub": "Kodambakkam UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1141,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F112",
+      "facility_name": "Ragava Colony UPHC ",
+      "tu": "Saidapet West",
+      "naat_hub": "ESIC Hospital Kk Nagar",
+      "cartridges_left": 0,
+      "presumptive_tests": 1365,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F120",
+      "facility_name": "Sakthinagar UPHC",
+      "tu": "Porur",
+      "naat_hub": "Chinnaporur UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1158,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F127",
+      "facility_name": "Appavu Street UPHC",
+      "tu": "Nanganallur",
+      "naat_hub": "Nanganallur UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1314,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F137",
+      "facility_name": "Sasthri Nagar UPHC",
+      "tu": "Velachery",
+      "naat_hub": "Adambakkam UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1740,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F138",
+      "facility_name": "Taramani UPHC ",
+      "tu": "Velachery",
+      "naat_hub": "Adambakkam UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1762,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F147",
+      "facility_name": "Puzhithivakkam UPHC",
+      "tu": "Puzhithivakkam",
+      "naat_hub": "Jaladiyanpettai UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1512,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    },
+    {
+      "facility_id": "F148",
+      "facility_name": "Neelangkarai UPHC",
+      "tu": "Kannagi Nagar",
+      "naat_hub": "Palavakkam UPHC",
+      "cartridges_left": 0,
+      "presumptive_tests": 1773,
+      "risk_level": "CRITICAL",
+      "date": "2026-06-04"
+    }
+  ],
+  "predictions": [
+    {
+      "facility_id": "F001",
+      "facility_name": "Thangal Uphc",
+      "tu": "Thiruvetriyur",
+      "naat_hub": "Eranavoor UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F020",
+      "facility_name": "Lakshmipuram Uphc",
+      "tu": "Madhavaram",
+      "naat_hub": "Puzhal UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F021",
+      "facility_name": "Samy Nagar Uphc",
+      "tu": "Madhavaram",
+      "naat_hub": "Puzhal UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F034",
+      "facility_name": "Korrukupet Uphc",
+      "tu": "Tondiarpet",
+      "naat_hub": "CDH",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F045",
+      "facility_name": "Sharma Nagar",
+      "tu": "Kodungaiyur",
+      "naat_hub": "Kodungaiyur UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F055",
+      "facility_name": "BRN Garden UPHC",
+      "tu": "Basin Bridge",
+      "naat_hub": "Basin Briadge UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F070",
+      "facility_name": "Kolathur Uphc",
+      "tu": "Kolathur",
+      "naat_hub": "GPH Periyar Nagar",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F075",
+      "facility_name": "Veeramamunivar UPHC (mugapair east)",
+      "tu": "Padi Manjakuppam",
+      "naat_hub": "Padi Round Building",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F080",
+      "facility_name": "Chetpet Uphc",
+      "tu": "Aminjikarai",
+      "naat_hub": "ITM",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F091",
+      "facility_name": "Bharathipuram Uphc",
+      "tu": "Mmda",
+      "naat_hub": "MMDA UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F096",
+      "facility_name": "Krishnampet Uphc",
+      "tu": "Mylapore",
+      "naat_hub": "Beemanampet UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F103",
+      "facility_name": "Virugambakkam Uphc",
+      "tu": "Virugambakkam",
+      "naat_hub": "Koyembedu UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F106",
+      "facility_name": "K.K. Nagar UPHC",
+      "tu": "Kodambakkam Tu",
+      "naat_hub": "Kodambakkam UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F112",
+      "facility_name": "Ragava Colony UPHC ",
+      "tu": "Saidapet West",
+      "naat_hub": "ESIC Hospital Kk Nagar",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F120",
+      "facility_name": "Sakthinagar UPHC",
+      "tu": "Porur",
+      "naat_hub": "Chinnaporur UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F127",
+      "facility_name": "Appavu Street UPHC",
+      "tu": "Nanganallur",
+      "naat_hub": "Nanganallur UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F137",
+      "facility_name": "Sasthri Nagar UPHC",
+      "tu": "Velachery",
+      "naat_hub": "Adambakkam UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F138",
+      "facility_name": "Taramani UPHC ",
+      "tu": "Velachery",
+      "naat_hub": "Adambakkam UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F147",
+      "facility_name": "Puzhithivakkam UPHC",
+      "tu": "Puzhithivakkam",
+      "naat_hub": "Jaladiyanpettai UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    },
+    {
+      "facility_id": "F148",
+      "facility_name": "Neelangkarai UPHC",
+      "tu": "Kannagi Nagar",
+      "naat_hub": "Palavakkam UPHC",
+      "current_stock": 0,
+      "daily_consumption": 0.1,
+      "days_to_stockout": 0,
+      "predicted_date": "2026-06-04",
+      "urgency": "CRITICAL"
+    }
+  ],
+  "naat_alerts": [
+    {
+      "hub_id": "N005",
+      "hub_name": "Basin Briadge UPHC",
+      "tu": "Basin Bridge",
+      "current_monthly": 251,
+      "optimal_monthly": 203,
+      "naat_stock": 52,
+      "modules": 3,
+      "risk": "CHOKED"
+    },
+    {
+      "hub_id": "N007",
+      "hub_name": "Padi Round Building",
+      "tu": "Padi Manjakuppam",
+      "current_monthly": 244,
+      "optimal_monthly": 251,
+      "naat_stock": 88,
+      "modules": 3,
+      "risk": "HIGH"
+    },
+    {
+      "hub_id": "N010",
+      "hub_name": "Beemanampet UPHC",
+      "tu": "Mylapore",
+      "current_monthly": 264,
+      "optimal_monthly": 324,
+      "naat_stock": 75,
+      "modules": 2,
+      "risk": "HIGH"
+    },
+    {
+      "hub_id": "N011",
+      "hub_name": "Koyembedu UPHC",
+      "tu": "Virugambakkam",
+      "current_monthly": 264,
+      "optimal_monthly": 334,
+      "naat_stock": 63,
+      "modules": 2,
+      "risk": "HIGH"
+    },
+    {
+      "hub_id": "N012",
+      "hub_name": "Kodambakkam UPHC",
+      "tu": "Kodambakkam Tu",
+      "current_monthly": 243,
+      "optimal_monthly": 226,
+      "naat_stock": 18,
+      "modules": 4,
+      "risk": "CHOKED"
+    },
+    {
+      "hub_id": "N017",
+      "hub_name": "Jaladiyanpettai UPHC",
+      "tu": "Puzhithivakkam",
+      "current_monthly": 251,
+      "optimal_monthly": 221,
+      "naat_stock": 70,
+      "modules": 2,
+      "risk": "CHOKED"
+    }
+  ],
+  "routing": {
+    "F001": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 14.4
+    },
+    "F002": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 17.4
+    },
+    "F003": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.6
+    },
+    "F004": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.0
+    },
+    "F005": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 18.6
+    },
+    "F006": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.9
+    },
+    "F007": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 15.2
+    },
+    "F008": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 18.4
+    },
+    "F009": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 14.6
+    },
+    "F010": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 15.7
+    },
+    "F011": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 18.6
+    },
+    "F012": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.6
+    },
+    "F013": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.6
+    },
+    "F014": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 17.4
+    },
+    "F015": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 18.7
+    },
+    "F016": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.3
+    },
+    "F017": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.9
+    },
+    "F018": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 16.7
+    },
+    "F019": {
+      "best_naat": "N001",
+      "naat_name": "Eranavoor UPHC",
+      "naat_tu": "Thiruvetriyur",
+      "naat_stock": 19,
+      "estimated_cost": 14.4
+    },
+    "F020": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 21.9
+    },
+    "F021": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 22.5
+    },
+    "F022": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 22.9
+    },
+    "F023": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 22.9
+    },
+    "F024": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 24.4
+    },
+    "F025": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 23.2
+    },
+    "F026": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 24.6
+    },
+    "F027": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 24.1
+    },
+    "F028": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 21.8
+    },
+    "F029": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 22.8
+    },
+    "F030": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 24.4
+    },
+    "F031": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 21.7
+    },
+    "F032": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 23.7
+    },
+    "F033": {
+      "best_naat": "N002",
+      "naat_name": "Puzhal UPHC",
+      "naat_tu": "Madhavaram",
+      "naat_stock": 96,
+      "estimated_cost": 23.0
+    },
+    "F034": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 22.1
+    },
+    "F035": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 23.7
+    },
+    "F036": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 22.5
+    },
+    "F037": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 24.1
+    },
+    "F038": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 23.2
+    },
+    "F039": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 23.7
+    },
+    "F040": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 25.8
+    },
+    "F041": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 20.8
+    },
+    "F042": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 22.6
+    },
+    "F043": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 22.0
+    },
+    "F044": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 24.2
+    },
+    "F045": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 14.8
+    },
+    "F046": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 15.0
+    },
+    "F047": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 16.2
+    },
+    "F048": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 15.6
+    },
+    "F049": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 16.4
+    },
+    "F050": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 18.8
+    },
+    "F051": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 16.5
+    },
+    "F052": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 15.5
+    },
+    "F053": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 16.7
+    },
+    "F054": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 16.5
+    },
+    "F055": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 26.4
+    },
+    "F056": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 24.1
+    },
+    "F057": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 30.7
+    },
+    "F058": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 25.0
+    },
+    "F059": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 28.5
+    },
+    "F060": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 28.1
+    },
+    "F061": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 26.9
+    },
+    "F062": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 21.9
+    },
+    "F063": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 23.8
+    },
+    "F064": {
+      "best_naat": "N003",
+      "naat_name": "CDH",
+      "naat_tu": "Tondiarpet",
+      "naat_stock": 53,
+      "estimated_cost": 24.4
+    },
+    "F065": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 28.2
+    },
+    "F066": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 22.9
+    },
+    "F067": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 24.5
+    },
+    "F068": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 24.3
+    },
+    "F069": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 28.1
+    },
+    "F070": {
+      "best_naat": "N006",
+      "naat_name": "GPH Periyar Nagar",
+      "naat_tu": "Kolathur",
+      "naat_stock": 110,
+      "estimated_cost": 23.7
+    },
+    "F071": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 24.8
+    },
+    "F072": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 19.7
+    },
+    "F073": {
+      "best_naat": "N006",
+      "naat_name": "GPH Periyar Nagar",
+      "naat_tu": "Kolathur",
+      "naat_stock": 110,
+      "estimated_cost": 28.0
+    },
+    "F074": {
+      "best_naat": "N004",
+      "naat_name": "Kodungaiyur UPHC",
+      "naat_tu": "Kodungaiyur",
+      "naat_stock": 115,
+      "estimated_cost": 19.0
+    },
+    "F075": {
+      "best_naat": "N007",
+      "naat_name": "Padi Round Building",
+      "naat_tu": "Padi Manjakuppam",
+      "naat_stock": 88,
+      "estimated_cost": 31.9
+    },
+    "F076": {
+      "best_naat": "N007",
+      "naat_name": "Padi Round Building",
+      "naat_tu": "Padi Manjakuppam",
+      "naat_stock": 88,
+      "estimated_cost": 32.0
+    },
+    "F077": {
+      "best_naat": "N011",
+      "naat_name": "Koyembedu UPHC",
+      "naat_tu": "Virugambakkam",
+      "naat_stock": 63,
+      "estimated_cost": 31.0
+    },
+    "F078": {
+      "best_naat": "N007",
+      "naat_name": "Padi Round Building",
+      "naat_tu": "Padi Manjakuppam",
+      "naat_stock": 88,
+      "estimated_cost": 33.4
+    },
+    "F079": {
+      "best_naat": "N007",
+      "naat_name": "Padi Round Building",
+      "naat_tu": "Padi Manjakuppam",
+      "naat_stock": 88,
+      "estimated_cost": 29.7
+    },
+    "F080": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 23.0
+    },
+    "F081": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 24.2
+    },
+    "F082": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 22.6
+    },
+    "F083": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 21.9
+    },
+    "F084": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 23.4
+    },
+    "F085": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 24.4
+    },
+    "F086": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 20.7
+    },
+    "F087": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 24.5
+    },
+    "F088": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 21.8
+    },
+    "F089": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 23.8
+    },
+    "F090": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 23.9
+    },
+    "F091": {
+      "best_naat": "N009",
+      "naat_name": "MMDA UPHC",
+      "naat_tu": "Mmda",
+      "naat_stock": 25,
+      "estimated_cost": 27.7
+    },
+    "F092": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 25.6
+    },
+    "F093": {
+      "best_naat": "N009",
+      "naat_name": "MMDA UPHC",
+      "naat_tu": "Mmda",
+      "naat_stock": 25,
+      "estimated_cost": 32.2
+    },
+    "F094": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 27.2
+    },
+    "F095": {
+      "best_naat": "N011",
+      "naat_name": "Koyembedu UPHC",
+      "naat_tu": "Virugambakkam",
+      "naat_stock": 63,
+      "estimated_cost": 29.2
+    },
+    "F096": {
+      "best_naat": "N010",
+      "naat_name": "Beemanampet UPHC",
+      "naat_tu": "Mylapore",
+      "naat_stock": 75,
+      "estimated_cost": 26.9
+    },
+    "F097": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 23.1
+    },
+    "F098": {
+      "best_naat": "N010",
+      "naat_name": "Beemanampet UPHC",
+      "naat_tu": "Mylapore",
+      "naat_stock": 75,
+      "estimated_cost": 26.5
+    },
+    "F099": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 26.5
+    },
+    "F100": {
+      "best_naat": "N010",
+      "naat_name": "Beemanampet UPHC",
+      "naat_tu": "Mylapore",
+      "naat_stock": 75,
+      "estimated_cost": 27.6
+    },
+    "F101": {
+      "best_naat": "N010",
+      "naat_name": "Beemanampet UPHC",
+      "naat_tu": "Mylapore",
+      "naat_stock": 75,
+      "estimated_cost": 25.2
+    },
+    "F102": {
+      "best_naat": "N008",
+      "naat_name": "ITM",
+      "naat_tu": "Aminjikarai",
+      "naat_stock": 73,
+      "estimated_cost": 24.4
+    },
+    "F103": {
+      "best_naat": "N011",
+      "naat_name": "Koyembedu UPHC",
+      "naat_tu": "Virugambakkam",
+      "naat_stock": 63,
+      "estimated_cost": 25.1
+    },
+    "F104": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 29.2
+    },
+    "F105": {
+      "best_naat": "N011",
+      "naat_name": "Koyembedu UPHC",
+      "naat_tu": "Virugambakkam",
+      "naat_stock": 63,
+      "estimated_cost": 25.4
+    },
+    "F106": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 21.5
+    },
+    "F107": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 26.9
+    },
+    "F108": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 23.5
+    },
+    "F109": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 23.9
+    },
+    "F110": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 27.0
+    },
+    "F111": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 27.9
+    },
+    "F112": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 24.3
+    },
+    "F113": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 26.6
+    },
+    "F114": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 27.0
+    },
+    "F115": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 25.5
+    },
+    "F116": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 22.7
+    },
+    "F117": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 23.2
+    },
+    "F118": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 23.4
+    },
+    "F119": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 21.4
+    },
+    "F120": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 19.3
+    },
+    "F121": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 19.6
+    },
+    "F122": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 25.2
+    },
+    "F123": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 20.7
+    },
+    "F124": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 22.5
+    },
+    "F125": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 22.5
+    },
+    "F126": {
+      "best_naat": "N014",
+      "naat_name": "Chinnaporur UPHC",
+      "naat_tu": "Porur",
+      "naat_stock": 67,
+      "estimated_cost": 20.8
+    },
+    "F127": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 17.4
+    },
+    "F128": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 23.6
+    },
+    "F129": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 18.9
+    },
+    "F130": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 20.5
+    },
+    "F131": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 26.1
+    },
+    "F132": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 19.5
+    },
+    "F133": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 25.6
+    },
+    "F134": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 20.4
+    },
+    "F135": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 19.8
+    },
+    "F136": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 21.2
+    },
+    "F137": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 11.6
+    },
+    "F138": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 13.8
+    },
+    "F139": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 14.2
+    },
+    "F140": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 13.2
+    },
+    "F141": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 13.3
+    },
+    "F142": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 13.7
+    },
+    "F143": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 13.9
+    },
+    "F144": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 17.4
+    },
+    "F145": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 15.6
+    },
+    "F146": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 15.2
+    },
+    "F147": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 28.7
+    },
+    "F148": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 26.2
+    },
+    "F149": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 27.4
+    },
+    "F150": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 26.0
+    },
+    "F151": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 26.6
+    },
+    "F152": {
+      "best_naat": "N018",
+      "naat_name": "Palavakkam UPHC",
+      "naat_tu": "Kannagi Nagar",
+      "naat_stock": 21,
+      "estimated_cost": 27.0
+    },
+    "F153": {
+      "best_naat": "N016",
+      "naat_name": "Adambakkam UPHC",
+      "naat_tu": "Velachery",
+      "naat_stock": 33,
+      "estimated_cost": 23.1
+    }
+  }
+}
