@@ -332,7 +332,7 @@ def load_qp_tool():
     &bull; Scenario 1: NAAT load, gap, utilization, cost benefit<br>
     &bull; Scenario 2: DR-TB stratified detection vs upfront NAAT
   </p>
-  <a href='https://jebamalar2j.github.io/diagnet/qp_tool.html' target='_blank'
+  <a href='https://jebamalar2j.github.io/disha/qp_tool.html' target='_blank'
      style='display:inline-block;background:#1f6feb;color:#fff;padding:10px 20px;
             border-radius:6px;text-decoration:none;font-size:13px;font-weight:600'>
     Launch QP/Uniamp Optimiser &#8599;
